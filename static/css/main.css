@@ -1,0 +1,48 @@
+.topnav{
+    float:right;
+    padding-right: 30px;
+}
+/* 
+.topnav button{
+    padding-left:40px;
+    padding-right:40px; 
+} */
+
+body{
+    background-color: #f0f0f6;
+}
+
+.btn-active {
+    border-color: #2e45c7 !important;
+    color: white !important;
+    background-color: #2e45c7 !important;
+}
+
+.btn {
+    border: 6px solid black;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    padding-left:40px;
+    padding-right:40px;
+}
+
+.info {
+    border-color: #2e45c7;
+    color: #2e45c7
+}
+  
+.info:hover {
+    background: #2e45c7;
+    color: white;
+}
+
+.navbar-logo{
+    font-size: 60px;
+    float:left !important;
+    position: relative;
+    color: #2e45c7;
+}

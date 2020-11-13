@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div class="topnav">
+        <button class="btn info btn-active">Home</button>
+        <button class="btn info">About Us</button>
+        <button class="btn info">Sign Up</button>
+        <button class="btn info">Log In</button>
+        <a class="navbar-logo">Classroom</a>
+    </div>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -14,14 +14,11 @@ def register_view(request):
             return redirect('home')
         else:
             return render(request,'base/register.html',{'form':form})
-
     form=UserCreationForm()
     return render(request,'base/register.html',{'form':form})
 
-@login_required
 def home(request):
     return render(request,'base/home.html')  
-
 
 def login_view(request):
     if request.method=="POST":
@@ -41,6 +38,3 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
-
-
