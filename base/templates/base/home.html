@@ -1,3 +1,13 @@
 {% extends 'base/hamburger.html' %}
+
 {% block hamburger %}
+    {% if mappings %}
+        {% for mapping in mappings %}
+            <div>
+                {{ mapping.classroom_id.classroom_name }}
+                {{ mapping.classroom_id.section }}
+                {{ mapping.classroom_id.code }}
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
