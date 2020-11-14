@@ -9,17 +9,44 @@
  * prefixes.
  */
 
- body
- {
+body
+{
    margin: 0;
    padding: 0;
-   
-   /* make it look decent enough */
    background:#f0f0f6;
    color: #ffffff;
    font-family: "Avenir Next", "Avenir", sans-serif;
  }
+
+.btn {
+border: 6px solid black;
+background-color: white;
+border-radius: 5px;
+color: black;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+padding-left:40px;
+padding-right:40px;
+}
+
+.info {
+border-color: #2e45c7;
+color: #2e45c7
+}
+
+.info:hover {
+background: #2e45c7;
+color: white;
+}
  
+.toplogo{
+  font-size: 60px !important;
+  float:left !important;
+  position: relative !important;
+  color: #2e45c7 !important;
+}
+
  #menuToggle
  {
    display: block;

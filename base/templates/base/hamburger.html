@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/hamburger.css' %}">
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
+    <button class="btn info btn-active"><a href="{% url 'logout' %}">Logout</a></button>
     <nav role="navigation">
         <div id="menuToggle">
           <!--
@@ -37,6 +40,7 @@
           </ul>
         </div>
       </nav>
+      <a class="toplogo"> Classroom </a>
       {% block hamburger %}
       {% endblock %}
     </body>

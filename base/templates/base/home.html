@@ -1,12 +1,20 @@
 {% extends 'base/hamburger.html' %}
+{% load static %}
+{% block head %}
+   <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">  
+{% endblock %}
 
 {% block hamburger %}
     {% if mappings %}
         {% for mapping in mappings %}
-            <div>
-                {{ mapping.classroom_id.classroom_name }}
-                {{ mapping.classroom_id.section }}
-                {{ mapping.classroom_id.code }}
+            <div class="card">
+                <div class="header">
+                    <div style="color:white">{{ mapping.classroom_id.classroom_name }}</div>
+                </div>
+                    <div class="container">
+                        <div style="color:black">{{ mapping.classroom_id.section }}</div>
+                        <div style="color:black">{{ mapping.classroom_id.code }}</div>
+                </div>
             </div>
         {% endfor %}
     {% endif %}
