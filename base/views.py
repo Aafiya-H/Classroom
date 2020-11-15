@@ -25,7 +25,7 @@ def register_view(request):
 def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
-    mappings = chain(teacher_mapping,student_mapping)
+    mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/home.html',{'mappings':mappings})  
 
 def login_view(request):
@@ -69,7 +69,10 @@ def join_class(request):
         form = JoinClassForm(request.POST)
         if form.is_valid():
             code = form.cleaned_data.get('code')
-            classroom = Classrooms.objects.get(class_code=code)
+            try:
+                classroom = Classrooms.objects.get(class_code=code)
+            except Exception as e:
+                return redirect('home')
             student = Students(student_id = request.user, classroom_id = classroom)
             student.save()
             return redirect('home')
