@@ -8,7 +8,7 @@
  * production code, beware of the browser
  * prefixes.
  */
-
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 body
 {
    margin: 0;
@@ -16,33 +16,36 @@ body
    background:#f0f0f6;
    color: #ffffff;
    font-family: "Avenir Next", "Avenir", sans-serif;
- }
+}
 
-.btn {
+.mybtn {
 border: 6px solid black;
 background-color: white;
+/* float:right !important; */
 border-radius: 5px;
 color: black;
 padding: 14px 28px;
+padding-left: 50px;
 font-size: 16px;
 cursor: pointer;
 padding-left:40px;
 padding-right:40px;
 }
 
-.info {
+.myinfo {
 border-color: #2e45c7;
 color: #2e45c7
 }
 
-.info:hover {
+.myinfo:hover {
 background: #2e45c7;
 color: white;
 }
  
-.toplogo{
+.mytoplogo{
   font-size: 60px !important;
   float:left !important;
+  padding-left:80px;
   position: relative !important;
   color: #2e45c7 !important;
 }
@@ -51,8 +54,8 @@ color: white;
  {
    display: block;
    position: relative;
-   top: 50px;
-   left: 50px;
+   top: -29px;
+   left: 30px;
    
    z-index: 1;
    

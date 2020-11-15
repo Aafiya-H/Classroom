@@ -6,10 +6,16 @@
    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">  
 {% endblock %}
 
+{% block navbar %}
+    <button class="mybtn myinfo">Home</button>
+    <button class="mybtn myinfo">About Us</button>
+    <button class="mybtn myinfo">Log In</button>
+    <a class="mynavbar-logo">Classroom</a>
+{% endblock %}
+
 {% block content %}
-    <img class="boyandgirl" src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="500" height="600">
     <div class="login-page">
-        <div class="form">
+        <div class="myform">
         <!-- <form class="login-form">
             <input type="text" placeholder="username"/>
             <input type="password" placeholder="password"/>

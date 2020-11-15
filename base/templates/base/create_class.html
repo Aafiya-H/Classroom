@@ -9,7 +9,7 @@
 {% block content %}
     <img class="boyandgirl" src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="500" height="600">
     <div class="login-page">
-        <div class="form">
+        <div class="myform">
         <form class="login-form" method="POST">
             {% csrf_token %}
             {{form|crispy}}

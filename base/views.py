@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import CreateClassForm
+from .forms import CreateClassForm,UserRegisterationForm
 from .utils import generate_class_code
 from .models import Classrooms,Teachers,Students
 from .forms import JoinClassForm
@@ -11,7 +11,7 @@ from itertools import chain
 
 def register_view(request):
     if request.method=="POST":
-        form=UserCreationForm(request.POST)
+        form=UserRegisterationForm(request.POST)
         if form.is_valid():
             user=form.save()
             user_name=form.cleaned_data.get('username')
@@ -19,7 +19,7 @@ def register_view(request):
             return redirect('home')
         else:
             return render(request,'base/register.html',{'form':form})
-    form=UserCreationForm()
+    form=UserRegisterationForm()
     return render(request,'base/register.html',{'form':form})
 
 def home(request):

@@ -1,17 +1,17 @@
-.card {
+.mycard {
     width: 30%;
     display: flex;
     flex-direction: column;
     border: 1px blue solid;
 }
 
-.header {
+.myheader {
     height: 30%;
     background: blue;
     color: white;
     text-align: center;
 }
 
-.container {
+.mycontainer {
     padding: 2px 16px;
 }

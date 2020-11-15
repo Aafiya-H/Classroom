@@ -1,6 +1,8 @@
-.topnav{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+.mytopnav{
     float:right;
     padding-right: 30px;
+    max-width:100%;
 }
 /* 
 .topnav button{
@@ -9,19 +11,19 @@
 } */
 
 body{
-    background-color: #f0f0f6;
+    background-color: #f0f0f6 !important;
 }
 
-.btn-active {
+.mybtn-active {
     border-color: #2e45c7 !important;
     color: white !important;
     background-color: #2e45c7 !important;
 }
 
-.btn {
+.mybtn {
     border: 6px solid black;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     color: black;
     padding: 14px 28px;
     font-size: 16px;
@@ -30,19 +32,22 @@ body{
     padding-right:40px;
 }
 
-.info {
+.myinfo {
     border-color: #2e45c7;
     color: #2e45c7
 }
   
-.info:hover {
+.myinfo:hover {
     background: #2e45c7;
     color: white;
 }
 
-.navbar-logo{
+.mynavbar-logo{
     font-size: 60px;
     float:left !important;
-    position: relative;
+    position: relative !important;
     color: #2e45c7;
+    padding-right:900px;
+    font-weight: 900;
+    font-family:  'Inter', sans-serif;
 }

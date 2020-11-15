@@ -7,11 +7,11 @@
 {% block hamburger %}
     {% if mappings %}
         {% for mapping in mappings %}
-            <div class="card">
-                <div class="header">
+            <div class="mycard">
+                <div class="myheader">
                     <div style="color:white">{{ mapping.classroom_id.classroom_name }}</div>
                 </div>
-                    <div class="container">
+                    <div class="mycontainer">
                         <div style="color:black">{{ mapping.classroom_id.section }}</div>
                         <div style="color:black">{{ mapping.classroom_id.code }}</div>
                 </div>
