@@ -48,21 +48,19 @@
 {% block content_right %}
     <div class="login-page">
         <div class="myform">
-          <h1>Login</h1>
-
+          <h1 class="signup_card"><b>Login</b></h1>
+          <p class="signup_info">Login if you already have created an account</p>
         <!-- <form class="login-form">
             <input type="text" placeholder="username"/>
             <input type="password" placeholder="password"/>
             <button>login</button>
             <p class="message">Not registered? <a href="#">Create an account</a></p>
         </form> -->
-        <form class="login-form" method="POST">
-            {% csrf_token %}
-            {{form|crispy}}
-            <button class="submit-button" type='submit'>
-                Login
-            </button>
-        </form>
+            <form class="login-form" method="POST">
+              {% csrf_token %}
+              {{form|crispy}}
+              <button class="submit-button" type='submit'><b>Login</b></button>
+            </form>
         </div>
     </div>
 {% endblock %}

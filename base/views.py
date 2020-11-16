@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import CreateClassForm,UserRegisterationForm
+from .forms import CreateClassForm,UserRegisterationForm, UserAuthenticationForm
 from .utils import generate_class_code
 from .models import Classrooms,Teachers,Students
 from .forms import JoinClassForm
@@ -30,7 +30,7 @@ def home(request):
 
 def login_view(request):
     if request.method=="POST":
-        form=AuthenticationForm(request=request,data=request.POST)
+        form=UserAuthenticationForm(request=request,data=request.POST)
         if form.is_valid():
             user_name=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password')
@@ -40,7 +40,7 @@ def login_view(request):
                 return redirect('home')
         else:
             return render(request,'base/login.html',{'form':form})
-    form=AuthenticationForm() 
+    form=UserAuthenticationForm() 
     return render(request,'base/login.html',{'form':form}) 
 
 def logout_view(request):

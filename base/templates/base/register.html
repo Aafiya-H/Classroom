@@ -48,6 +48,8 @@
 {% block content_right %}
     <div class="login-page">
         <div class="myform">
+          <h1 class="signup_card"><b>SignUp</b></h1>
+          <p class="signup_info">Create a new account by giving a username and a new password</p>
     <!-- <form class="login-form">
         <input type="text" placeholder="username"/>
         <input type="password" placeholder="password"/>
@@ -57,9 +59,7 @@
         <form class="login-form" method="POST">
         {% csrf_token %}
         {{form|crispy}}
-            <button type='submit'>
-            Register
-            </button>
+            <button type='submit'><b>Register</b></button>
         </form>
         </div>
     </div>

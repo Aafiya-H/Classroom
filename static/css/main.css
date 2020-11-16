@@ -58,3 +58,14 @@ body{
 .navbar_custom{
     background-color: #f0f0f6 !important;   
 }
+
+.signup_card{
+    text-align: center;
+    color: #f0f0f6;
+
+}
+
+.signup_info{
+    text-align: center;
+    color: #f0f0f6;
+}
