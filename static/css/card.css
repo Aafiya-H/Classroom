@@ -17,6 +17,24 @@
 }
 
 .custom_card{
-    width: 370px !important;
-    height: 350px;
+    /* width: 370px !important;
+    height: 370px; */
+    border-radius: 20px !important ;
+}
+
+.card-img-caption {
+border-top-left-radius: calc(.25rem - 1px);
+border-top-right-radius: calc(.25rem - 1px);
+}
+
+.card-img-caption .card-img-top {
+z-index: 0;
+}
+    
+.card-img-caption .card-text {
+text-align: center;
+width: 100%;
+margin: 33% 0;
+position: absolute;
+z-index: 1;
 }

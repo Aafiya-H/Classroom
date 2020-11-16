@@ -6,35 +6,50 @@
 
 {% block hamburger %}
     {% if mappings %}
+    <div class="row">
         {% for mapping in mappings %}
-            <!-- <div class="mycard">
-                <div class="myheader">
-                    <div style="color:white">{{ mapping.classroom_id.classroom_name }}</div>
+            {% if forloop.counter|divisibleby:4 %}
+                    <div class="col-md-3">
+                        <div class="card custom_card" style="width: 18rem;">
+                            <img src="{% static 'images/home_page/img_bookclub.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p>
+                            {% if mapping.teacher_id %}
+                                <p class="card-text">{{ mapping.teacher_id}}</p>
+                            {% else %}
+                                <p class="card-text">{{ mapping.student_id }}</p>
+                            {% endif %}
+                            <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
+                            <p class="card-text">{{ mapping.classroom_id.section }}</p>  
+                            </div>
+                        </div>
+                    </div>
+    </div>
+    {% if not forloop.last %} 
+    <br>
+    <div class="row">
+    {% endif %}
+            {% else %}
+                <div class="col-md-3">
+                    <div class="card custom_card" style="width: 18rem;">
+                        <div class="d-flex flex-wrap align-items-center justify-content-center">
+                            <img class="card-img-top" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
+                            <div class="img-overlay"> <h2>{{ mapping.classroom_id.classroom_name }}</h2> </div>
+                        </div>
+                        <div class="card-body">
+                        <!-- <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p> -->
+                        {% if mapping.teacher_id %}
+                            <p class="card-text">{{ mapping.teacher_id}}</p>
+                        {% else %}
+                            <p class="card-text">{{ mapping.student_id }}</p>
+                        {% endif %}
+                        <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
+                        <p class="card-text">{{ mapping.classroom_id.section }}</p>  
+                        </div>
+                    </div>
                 </div>
-                    <div class="mycontainer">
-                        <div style="color:black">{{ mapping.classroom_id.section }}</div>
-                        <div style="color:black">{{ mapping.classroom_id.code }}</div>
-                </div>
-            </div> -->
-            <!-- <div class="card custom_card">
-                <div class="card-body">
-                  <h5 class="card-title">{{ mapping.classroom_id.classroom_name }}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{ mapping.classroom_id.code }}</h6>
-                  <p class="card-text">{{ mapping.classroom_id.section }}</p>
-                  <p class="card-text">{{ mapping.classroom_id.class_code }}</p>
-                   <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a> -->
-                <!-- </div> -->
-            <!-- </div>  -->
-            <a href='{% url "render_class" id=mapping.classroom_id.id %}'><div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p>
-                  <p class="card-text">{{ mapping.classroom_id.class_code }}</p>
-                  <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
-                  <p class="card-text">{{ mapping.classroom_id.section }}</p>  
-                </div>
-            </div></a>
+            {% endif %}
         {% endfor %}
+    </div>
     {% endif %}
 {% endblock %}
