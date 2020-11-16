@@ -1,0 +1,23 @@
+{% extends 'base/hamburger.html' %}
+{% load static %}
+{% block head %}
+<!--Link of css-->
+{% endblock %}
+{% block hamburger %}
+{{ classroom.classroom_name }}
+{{ classroom.class_code }}
+{{ classroom.section }}
+
+{% for student in students %}
+{{ student }}
+{% endfor %}
+
+{% for teacher in teachers %}
+{{ teacher }}
+{% endfor %}
+
+{% for assignment in assignments %}
+{{ assignment }}
+{% endfor %}
+
+{% endblock %}

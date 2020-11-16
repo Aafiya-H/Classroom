@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', views.logout_view,name='logout'),
     path('home/', views.home,name='home'),
     path('create_class/',views.create_class, name='create_class'),
-    path('join_class/',views.join_class,name='join_class')
+    path('join_class/',views.join_class,name='join_class'),
+    path('class/<int:id>',views.render_class,name='render_class')
 ]

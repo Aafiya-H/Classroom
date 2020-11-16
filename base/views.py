@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import CreateClassForm,UserRegisterationForm, UserAuthenticationForm
+# from .forms import CreateClassForm,UserRegisterationForm, UserAuthenticationForm
 from .utils import generate_class_code
-from .models import Classrooms,Teachers,Students
-from .forms import JoinClassForm
+from .models import *   #Classrooms,Teachers,Students
+from .forms import *    #JoinClassForm
 
 from itertools import chain
 
@@ -26,7 +26,28 @@ def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
-    return render(request,'base/home.html',{'mappings':mappings})  
+    return render(request,'base/home.html',{'mappings':mappings}) 
+
+def render_class(request,id):
+    #class name, code
+    #assignments: try, except block
+    #teacher
+    #student
+    classroom = Classrooms.objects.get(pk=id)
+    try: 
+        assignments = Assignments.objects.filter(classroom_id = id)
+    except Exception as e:
+        assignments = None
+
+    try:
+        students = Students.objects.filter( classroom_id = id)
+    except Exception as e:
+        students = None
+    
+    teachers = Teachers.objects.filter(classroom_id = id)
+    print(classroom)
+    return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers})
+  
 
 def login_view(request):
     if request.method=="POST":
@@ -80,3 +101,20 @@ def join_class(request):
             return render(request,'base/join_class.html',{'form':form})
     form = JoinClassForm()
     return render(request,'base/join_class.html',{'form':form})
+
+def create_assignment(request):
+    if request.method == 'POST':
+        form = CreateAssignmentForm(request.POST)
+        if form.is_valid():
+            assignment_name = forms.cleaned_data.get('assignment_name')
+            due_date = forms.cleaned_data.get('due_date')
+            instructions = forms.cleaned_data.get('instructions')
+            total_marks = forms.cleaned_data.get('total_marks')
+            assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks)
+            assignment.save()
+            return redirect('class_page')
+        else:
+            return render(request,'base/create_assignment.html',{'form':form})
+        form = CreateAssignmentForm()
+        return render(request,'base/create_assignment.html',{'form':form})
+

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-
+from . import models
+import datetime
 
 class CreateClassForm(forms.Form):
     class_name = forms.CharField(max_length=100,label='class_name')
@@ -9,6 +10,12 @@ class CreateClassForm(forms.Form):
 
 class JoinClassForm(forms.Form):
     code = forms.CharField(max_length=10,label='code')
+
+class CreateAssignmentForm(forms.Form):
+    assignment_name = forms.CharField(max_length=50,label='assignment_name')
+    due_date = forms.DateField(initial=datetime.date.today(),label='due_date')
+    instructions = forms.CharField(label='class_name',widget=forms.Textarea)
+    total_marks = forms.IntegerField(label='total_marks')
 
 class UserRegisterationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):

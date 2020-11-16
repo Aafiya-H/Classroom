@@ -22,11 +22,11 @@
                   <h6 class="card-subtitle mb-2 text-muted">{{ mapping.classroom_id.code }}</h6>
                   <p class="card-text">{{ mapping.classroom_id.section }}</p>
                   <p class="card-text">{{ mapping.classroom_id.class_code }}</p>
-                  <!-- <a href="#" class="card-link">Card link</a>
+                   <a href="#" class="card-link">Card link</a>
                   <a href="#" class="card-link">Another link</a> -->
                 <!-- </div> -->
             <!-- </div>  -->
-            <div class="card" style="width: 18rem;">
+            <a href='{% url "render_class" id=mapping.classroom_id.id %}'><div class="card" style="width: 18rem;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                   <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p>
@@ -34,7 +34,7 @@
                   <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
                   <p class="card-text">{{ mapping.classroom_id.section }}</p>  
                 </div>
-            </div>
+            </div></a>
         {% endfor %}
     {% endif %}
 {% endblock %}
