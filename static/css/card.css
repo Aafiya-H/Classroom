@@ -15,3 +15,8 @@
 .mycontainer {
     padding: 2px 16px;
 }
+
+.custom_card{
+    width: 370px !important;
+    height: 350px;
+}
