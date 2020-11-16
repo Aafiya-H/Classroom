@@ -7,26 +7,58 @@
 {% endblock %}
 
 {% block navbar %}
-    <button class="mybtn myinfo">Home</button>
+<nav class="navbar navbar-expand-lg navbar-light navbar_custom">
+    <a class="navbar-brand" href="#" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 7%; margin-right: 30%"><b>Classroom</b></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link mybtn myinfo" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mybtn myinfo" href="#">About</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link mybtn myinfo" href="#">Login/Signup<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+    </div>
+    <!-- <button class="mybtn myinfo">Home</button>
     <button class="mybtn myinfo">About Us</button>
-    <button class="mybtn myinfo">Log In</button>
-    <a class="mynavbar-logo">Classroom</a>
+    <button class="mybtn myinfo">Sign Up</button> -->
+</nav>
 {% endblock %}
 
-{% block content %}
+{% block content_left %}
+    <div class="login-page">
+        <img src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="400" height="400">
+    </div>
+{% endblock %}
+
+{% block content_right %}
     <div class="login-page">
         <div class="myform">
-        <!-- <form class="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
-        </form> -->
+    <!-- <form class="login-form">
+        <input type="text" placeholder="username"/>
+        <input type="password" placeholder="password"/>
+        <button>login</button>
+        <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form> -->
         <form class="login-form" method="POST">
-            {% csrf_token %}
-            {{form|crispy}}
+        {% csrf_token %}
+        {{form|crispy}}
             <button type='submit'>
-                Register
+            Register
             </button>
         </form>
         </div>

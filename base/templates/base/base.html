@@ -18,11 +18,15 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md">
-                <img src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="500" height="600">
+            <!-- <div class="col-md"> -->
+                <!-- <img src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="500" height="600"> -->
+            <!-- </div> -->
+            <div class="col-md-6">
+                {% block content_left %}
+                {% endblock %}
             </div>
-            <div class="col-md">
-                {% block content %}
+            <div class="col-md-6">
+                {% block content_right %}
                 {% endblock %}
             </div>
         </div>
