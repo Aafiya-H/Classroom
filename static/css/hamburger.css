@@ -13,7 +13,7 @@ body
 {
    margin: 0;
    padding: 0;
-   background:#f0f0f6;
+   background:#f0f0f6 !important;
    color: #ffffff;
    font-family: "Avenir Next", "Avenir", sans-serif;
 }

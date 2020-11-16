@@ -64,7 +64,7 @@ def create_class(request):
     form = CreateClassForm()
     return render(request,'base/create_class.html',{'form':form})
 
-def join_class(request):
+def join_class(request,id):
     if request.method == 'POST':
         form = JoinClassForm(request.POST)
         if form.is_valid():
