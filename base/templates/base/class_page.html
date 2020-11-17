@@ -1,7 +1,6 @@
 {% extends 'base/base_class.html' %}
 {% load static %}
 {% block head %}
-<!--Link of css-->
 {% endblock %}
 
 {% block hamburger %}
@@ -14,12 +13,10 @@
     <div class="contatiner_of_assignments">
         {% if assignments %}
             {% for assignment in assignments %}
-                <a href=""><div class="card assignment_card" style="width: 18rem;">
+                <a href="{% url 'assignment_summary' assignment_id=assignment.id %}"><div class="card assignment_card" style="width: 18rem;">
                     <div class="card-body">
                     <h5 class="card-title">{{assignment.assignment_name}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ assignment.due_date }}</h6>
-                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                    <!-- <a href="#" class="card-link">Card link</a> -->
                     </div>
                 </div></a>  
             {% endfor %}
