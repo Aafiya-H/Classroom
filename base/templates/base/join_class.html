@@ -7,7 +7,12 @@
 {% endblock %}
 
 {% block content_left %}
-    <img class="boyandgirl" src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="500" height="600">
+    <div class="login-page">
+        <img src="{% static 'images/boy_and_girl.svg' %}" alt="Boy and Girl" width="400" height="400">
+    </div>
+{% endblock %}
+
+{% block content_right %}
     <div class="login-page">
         <div class="myform">
         <form class="mylogin-form" method="POST">

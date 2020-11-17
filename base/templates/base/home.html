@@ -10,10 +10,13 @@
         {% for mapping in mappings %}
             {% if forloop.counter|divisibleby:4 %}
                     <div class="col-md-3">
-                        <div class="card custom_card" style="width: 18rem;">
-                            <img src="{% static 'images/home_page/img_bookclub.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card custom_card card-margin" style="width: 18rem;">
+                            <div class="d-flex flex-wrap align-items-center justify-content-center card-background">
+                                <img class="card-img-top card-background" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
+                                <div class="img-overlay"><a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2>{{ mapping.classroom_id.classroom_name }}</a> </h2> </div>
+                            </div>
                             <div class="card-body">
-                            <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p>
+                            <!-- <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p> -->
                             {% if mapping.teacher_id %}
                                 <p class="card-text">{{ mapping.teacher_id}}</p>
                             {% else %}
@@ -32,9 +35,9 @@
             {% else %}
                 <div class="col-md-3">
                     <div class="card custom_card" style="width: 18rem;">
-                        <div class="d-flex flex-wrap align-items-center justify-content-center">
-                            <img class="card-img-top" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
-                            <div class="img-overlay"> <h2>{{ mapping.classroom_id.classroom_name }}</h2> </div>
+                        <div class="d-flex flex-wrap align-items-center justify-content-center card-background">
+                            <img class="card-img-top card-background" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
+                            <div class="img-overlay"><a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2>{{ mapping.classroom_id.classroom_name }}</a> </h2> </div>
                         </div>
                         <div class="card-body">
                         <!-- <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p> -->

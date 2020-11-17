@@ -4,8 +4,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 # from .forms import CreateClassForm,UserRegisterationForm, UserAuthenticationForm
 from .utils import generate_class_code
-from .models import *   #Classrooms,Teachers,Students
-from .forms import *    #JoinClassForm
+from .models import *   # Classrooms,Teachers,Students
+from .forms import *    # JoinClassForm
 
 from itertools import chain
 
@@ -85,7 +85,7 @@ def create_class(request):
     form = CreateClassForm()
     return render(request,'base/create_class.html',{'form':form})
 
-def join_class(request,id):
+def join_class(request):
     if request.method == 'POST':
         form = JoinClassForm(request.POST)
         if form.is_valid():
@@ -117,4 +117,3 @@ def create_assignment(request):
             return render(request,'base/create_assignment.html',{'form':form})
         form = CreateAssignmentForm()
         return render(request,'base/create_assignment.html',{'form':form})
-

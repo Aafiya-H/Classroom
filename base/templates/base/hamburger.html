@@ -12,30 +12,50 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   </head>
 <body>
-    <a class="mytoplogo"> Classroom </a>
-    <button class="mybtn myinfo mybtn-active"><a href="{% url 'logout' %}">Logout</a></button>
-    <nav role="navigation">
+    <!-- <a class="mytoplogo"> Classroom </a>
+    <div class="logout_button">
+      <img class="plus_button" src="{% static 'images/plus.svg' %}"/>
+    </div>
+    <div class="logout_button">
+      <button class="mybtn myinfo mybtn-active"><a href="{% url 'logout' %}">Logout</a></button>
+    </div> -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar_custom">
+      <a class="navbar-brand" href="#" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 7%; margin-right: 30%"><b>Classroom</b></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item">
+              <a href="#"><img class="plus_button" src="{% static 'images/plus.svg' %}"/></a>
+            </li> -->
+            <li class="nav-item active">
+              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'create_class' %}">Add Class</a></button></a>
+            </li>
+            <li class="nav-item active">
+              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'join_class' %}">Join Class</a></button></a>
+            </li>
+            <li class="nav-item active">
+              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'logout' %}">Logout</a></button></a>
+            </li>
+          </ul>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+      </div>
+    </nav>
+    <br>
+    <!-- <nav role="navigation">
         <div id="menuToggle">
-          <!--
-          A fake / hidden checkbox is used as click reciever,
-          so you can use the :checked selector on it.
-          -->
           <input type="checkbox" />
-      
-          <!--
-          Some spans to act as a hamburger.
-      
-          They are acting like a real hamburger,
-          not that McDonalds stuff.
-          -->
           <span></span>
           <span></span>
           <span></span>
-      
-          <!--
-          Too bad the menu has to be inside of the button
-          but hey, it's pure CSS magic.
-          -->
           <ul id="menu">
             <a href="#"><li>Class 1</li></a>
             <a href="#"><li>Class 2</li></a>
@@ -43,7 +63,7 @@
             <a href="#"><li>Class 4</li></a>
           </ul>
         </div>
-      </nav>
+      </nav> -->
       {% block hamburger %}
       {% endblock %}
     </body>
