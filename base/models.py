@@ -24,6 +24,7 @@ class Assignments(models.Model):
     posted_date=models.DateField(auto_now_add=True)
     instructions=models.TextField()
     total_marks=models.IntegerField(default=100)
+    # posted_by_teacher = models.ForeignKey(Teachers,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.assignment_name
@@ -34,3 +35,4 @@ class Submissions(models.Model):
     submitted_date=models.DateField(auto_now_add=True)
     submitted_on_time=models.BooleanField()
     marks_alloted=models.IntegerField(default=0)
+    submission_file = models.TextField()

@@ -12,10 +12,10 @@ class JoinClassForm(forms.Form):
     code = forms.CharField(max_length=10,label='code')
 
 class CreateAssignmentForm(forms.Form):
-    assignment_name = forms.CharField(max_length=50,label='assignment_name')
-    due_date = forms.DateField(initial=datetime.date.today(),label='due_date')
-    instructions = forms.CharField(label='class_name',widget=forms.Textarea)
-    total_marks = forms.IntegerField(label='total_marks')
+    assignment_name = forms.CharField(max_length=50,label='Assignment Name')
+    due_date = forms.DateField(initial=datetime.date.today(),label='Due Date')
+    instructions = forms.CharField(label='Instructions',widget=forms.Textarea)
+    total_marks = forms.IntegerField(label='Total Marks')
 
 class UserRegisterationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):

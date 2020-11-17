@@ -3,6 +3,39 @@ body{
     background-color: #f0f0f6 !important;
 }
 
+.assignment_card{
+  text-align: center !important;
+  width: 100% !important;
+  margin-right: 10% !important;
+  margin-bottom: 2%;
+}
+
+.contatiner_of_assignments{
+  /* width: 100%; */
+  margin-left: 10%;
+  margin-right: 10% !important;
+}
+
+.class_title{
+    color: #ffffff;
+    /* padding:5px; */
+    padding-top:1px;
+}
+
+.class_code{
+    color: #ffffff !important;
+}
+
+.class_jumbotron{
+    border-radius: 20px !important;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+    background-image: url("../images/img_backtoschool.jpg");
+    background-size: cover;
+    padding-top:4% !important;
+}
+
 #menuToggle
 {
   display: block;

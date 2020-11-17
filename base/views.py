@@ -29,10 +29,6 @@ def home(request):
     return render(request,'base/home.html',{'mappings':mappings}) 
 
 def render_class(request,id):
-    #class name, code
-    #assignments: try, except block
-    #teacher
-    #student
     classroom = Classrooms.objects.get(pk=id)
     try: 
         assignments = Assignments.objects.filter(classroom_id = id)
@@ -45,10 +41,11 @@ def render_class(request,id):
         students = None
     
     teachers = Teachers.objects.filter(classroom_id = id)
-    print(classroom)
-    return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers})
+    teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+    student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    mappings = chain(teacher_mapping,student_mapping) 
+    return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers,"mappings":mappings})
   
-
 def login_view(request):
     if request.method=="POST":
         form=UserAuthenticationForm(request=request,data=request.POST)
@@ -102,18 +99,19 @@ def join_class(request):
     form = JoinClassForm()
     return render(request,'base/join_class.html',{'form':form})
 
-def create_assignment(request):
+def create_assignment(request,classroom_id):
     if request.method == 'POST':
         form = CreateAssignmentForm(request.POST)
         if form.is_valid():
-            assignment_name = forms.cleaned_data.get('assignment_name')
-            due_date = forms.cleaned_data.get('due_date')
-            instructions = forms.cleaned_data.get('instructions')
-            total_marks = forms.cleaned_data.get('total_marks')
-            assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks)
+            assignment_name = form.cleaned_data.get('assignment_name')
+            due_date = form.cleaned_data.get('due_date')
+            classroom_id = Classrooms.objects.get(pk=classroom_id)
+            instructions = form.cleaned_data.get('instructions')
+            total_marks = form.cleaned_data.get('total_marks')
+            assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
-            return redirect('class_page')
+            return redirect('render_class',id=classroom_id.id)
         else:
             return render(request,'base/create_assignment.html',{'form':form})
-        form = CreateAssignmentForm()
-        return render(request,'base/create_assignment.html',{'form':form})
+    form = CreateAssignmentForm()
+    return render(request,'base/create_assignment.html',{'form':form}) 

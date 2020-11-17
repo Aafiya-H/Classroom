@@ -5,20 +5,24 @@
 {% endblock %}
 
 {% block hamburger %}
-<!-- {{ classroom.classroom_name }}
-{{ classroom.class_code }}
-{{ classroom.section }}
-
-{% for student in students %}
-{{ student }}
-{% endfor %}
-
-{% for teacher in teachers %}
-{{ teacher }}
-{% endfor %}
-
-{% for assignment in assignments %}
-{{ assignment }}
-{% endfor %} -->
-
+    <div class="jumbotron jumbotron-fluid class_jumbotron">
+        <div class="container">
+        <h1 class="display-4 class_title">{{ classroom.classroom_name }}</h1>
+        <p class="lead class_code">Class code: {{ classroom.class_code }}</p>
+        </div>
+    </div>
+    <div class="contatiner_of_assignments">
+        {% if assignments %}
+            {% for assignment in assignments %}
+                <a href=""><div class="card assignment_card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{assignment.assignment_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ assignment.due_date }}</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    <!-- <a href="#" class="card-link">Card link</a> -->
+                    </div>
+                </div></a>  
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
