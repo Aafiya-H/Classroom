@@ -49,6 +49,7 @@ def render_class(request,id):
     mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers,"mappings":mappings})
 
+@login_required
 def assignment_summary(request,assignment_id):
     assignment = Assignments.objects.filter(pk = assignment_id).first()
     submissions = Submissions.objects.filter(assignment_id = assignment_id)
