@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-# from .forms import CreateClassForm,UserRegisterationForm, UserAuthenticationForm
 from .utils import generate_class_code
-from .models import *   # Classrooms,Teachers,Students
-from .forms import *    # JoinClassForm
+from .decorators import access_class,login_excluded,teacher_required
+from .models import * 
+from .forms import *     
 
 from itertools import chain
 
+@login_excluded('home')
 def register_view(request):
     if request.method=="POST":
         form=UserRegisterationForm(request.POST)
@@ -22,12 +22,15 @@ def register_view(request):
     form=UserRegisterationForm()
     return render(request,'base/register.html',{'form':form})
 
+@login_required
 def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/home.html',{'mappings':mappings}) 
 
+@access_class('home')
+@login_required
 def render_class(request,id):
     classroom = Classrooms.objects.get(pk=id)
     try: 
@@ -45,7 +48,8 @@ def render_class(request,id):
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers,"mappings":mappings})
-  
+
+@login_excluded('home')  
 def login_view(request):
     if request.method=="POST":
         form=UserAuthenticationForm(request=request,data=request.POST)
@@ -61,10 +65,12 @@ def login_view(request):
     form=UserAuthenticationForm() 
     return render(request,'base/login.html',{'form':form}) 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required
 def create_class(request):
     if request.method == 'POST':
         form = CreateClassForm(request.POST)
@@ -82,6 +88,7 @@ def create_class(request):
     form = CreateClassForm()
     return render(request,'base/create_class.html',{'form':form})
 
+@login_required
 def join_class(request):
     if request.method == 'POST':
         form = JoinClassForm(request.POST)
@@ -99,6 +106,8 @@ def join_class(request):
     form = JoinClassForm()
     return render(request,'base/join_class.html',{'form':form})
 
+@teacher_required('home')
+@login_required
 def create_assignment(request,classroom_id):
     if request.method == 'POST':
         form = CreateAssignmentForm(request.POST)
