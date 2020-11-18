@@ -62,6 +62,18 @@ def render_class(request,id):
     mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers,"mappings":mappings})
 
+@login_required
+def assignment_summary(request,assignment_id):
+    assignment = Assignments.objects.filter(pk = assignment_id).first()
+    submissions = Submissions.objects.filter(assignment_id = assignment_id)
+    teachers = Teachers.objects.filter(classroom_id = assignment.classroom_id)
+
+    teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+    student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    mappings = chain(teacher_mapping,student_mapping)
+    # print(submissions)
+    return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
+
 @login_excluded('home')  
 def login_view(request):
     if request.method=="POST":
