@@ -89,6 +89,30 @@ def assignment_summary(request,assignment_id):
     # print(submissions)
     return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
 
+@login_required
+# @student_required('home')
+def assignment_submission(request,assignment_id):
+    if request.method == 'POST':
+        form = SubmitAssignmentForm(request.POST)
+        if form.is_valid():
+            assignment = Assignments.objects.get(pk=assignment_id)
+            # classroom = Classrooms.objects.get(pk=Assignment.classroom.classroom_id)
+            student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
+            file_name = form.cleaned_data.get('submission_file')
+            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+            submission.save()
+            return redirect('render_class',id=assignment.classroom_id.id)
+        else:
+            return render(request,'base/home.html')
+    form = SubmitAssignmentForm()
+    return render(request,'base/submit_assignment.html',{'form':form})
+
+
+
+
+
+
+
 @login_excluded('home')  
 def login_view(request):
     if request.method=="POST":

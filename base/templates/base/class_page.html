@@ -13,12 +13,20 @@
     <div class="contatiner_of_assignments">
         {% if assignments %}
             {% for assignment in assignments %}
-                <a href="{% url 'assignment_summary' assignment_id=assignment.id %}"><div class="card assignment_card" style="width: 18rem;">
-                    <div class="card-body">
-                    <h5 class="card-title">{{assignment.assignment_name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ assignment.due_date }}</h6>
-                    </div>
-                </div></a>  
+                {% for teacher in teachers %}
+                {% if teacher.teacher_id.id == user.id %}
+                <a href="{% url 'assignment_summary' assignment_id=assignment.id %}">
+                {% else %}
+                <a href="{% url 'submit_assignment' assignment_id=assignment.id %}"> 
+                {% endif %}
+                {% endfor %}
+                <div class="card assignment_card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">{{assignment.assignment_name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ assignment.due_date }}</h6>
+                </div>
+                </div>
+                </a>
             {% endfor %}
         {% endif %}
     </div>

@@ -80,6 +80,7 @@ def student_required(redirect_to):
                 return redirect('render_class',id=query_id)
 
             student_count = Students.objects.filter(student_id=request.user,classroom_id=classroom).count()
+            print(student_count)
             if student_count == 0:
                 return redirect('render_class',id=query_id)
             return view_method(request,*args,**kwargs)

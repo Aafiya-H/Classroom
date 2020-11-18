@@ -33,6 +33,6 @@ class Submissions(models.Model):
     assignment_id=models.ForeignKey(Assignments,on_delete=models.CASCADE)
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
     submitted_date=models.DateField(auto_now_add=True)
-    submitted_on_time=models.BooleanField()
+    submitted_on_time=models.BooleanField(default=True)
     marks_alloted=models.IntegerField(default=0)
     submission_file = models.TextField()
