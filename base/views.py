@@ -29,6 +29,19 @@ def home(request):
     mappings = chain(teacher_mapping,student_mapping) 
     return render(request,'base/home.html',{'mappings':mappings}) 
 
+@login_required
+def delete_assignment():
+    pass 
+
+
+@login_required
+def unenroll_class():
+    pass 
+
+@login_required
+def delete_class():
+    pass 
+
 @access_class('home')
 @login_required
 def render_class(request,id):
