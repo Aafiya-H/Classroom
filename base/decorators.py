@@ -39,14 +39,47 @@ def login_excluded(redirect_to):
 def teacher_required(redirect_to):
     def _method_wrapper(view_method):
         def _arguments_wrapper(request, *args, **kwargs):
+            if kwargs['classroom_id']:
+                query_id = kwargs['classroom_id']
+            elif kwargs['assignment_id']:
+                try:
+                    assignment = Assignment.objects.get(pk=kwargs['assignment_id'])
+                except Exception as e:
+                    return redirect('home')
+                query_id = assignment.classroom_id.id  
+            
             try:
-                classroom = Classrooms.objects.get(pk=kwargs['classroom_id'])
+                classroom = Classrooms.objects.get(pk=query_id)
             except Exception as e:
-                return redirect('render_class',id=kwargs['classroom_id'])
+                return redirect('render_class',id=query_id)
 
             teacher_count = Teachers.objects.filter(teacher_id=request.user,classroom_id=classroom).count()
             if teacher_count == 0:
-                return redirect('render_class',id=kwargs['classroom_id'])
+                return redirect('render_class',id=query_id)
+            return view_method(request,*args,**kwargs)
+        return _arguments_wrapper
+    return _method_wrapper 
+
+def student_required(redirect_to):
+    def _method_wrapper(view_method):
+        def _arguments_wrapper(request, *args, **kwargs):
+            if kwargs['classroo_id']:
+                query_id = kwargs['classroom_id']
+            elif kwargs['assignment_id']:
+                try:
+                    assignment = Assignment.objects.get(pk=kwargs['assignment_id'])
+                except Exception as e:
+                    return redirect('home')
+                query_id = assignment.classroom_id.id  
+            
+            try:
+                classroom = Classrooms.objects.get(pk=query_id)
+            except Exception as e:
+                return redirect('render_class',id=query_id)
+
+            student_count = Students.objects.filter(student_id=request.user,classroom_id=classroom).count()
+            if student_count == 0:
+                return redirect('render_class',id=query_id)
             return view_method(request,*args,**kwargs)
         return _arguments_wrapper
     return _method_wrapper 

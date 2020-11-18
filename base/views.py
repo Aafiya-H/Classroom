@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from .utils import generate_class_code
-from .decorators import access_class,login_excluded,teacher_required
+from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
 from .forms import *     
 
@@ -30,20 +30,34 @@ def home(request):
     return render(request,'base/home.html',{'mappings':mappings}) 
 
 @login_required
-def delete_assignment():
-    pass 
-
+@teacher_required('home')
+def delete_assignment(request,assignment_id):
+    assignment = Assignments.objects.filter(pk=assignment_id)
+    if assignment.count() == 0:
+        return redirect('home')
+    else:
+        classroom_id = assignment.classroom_id.id 
+        Assignments.objects.filter(pk=assignment_id).delete()
+        return redirect('render_class', id=classroom_id)
 
 @login_required
-def unenroll_class():
-    pass 
+@student_required('home')
+def unenroll_class(request,classroom_id):
+    classroom = Classrooms.objects.get(pk=classroom_id)
+    student_mapping = Students.objects.filter(student_id=request.user,classroom_id=classroom).delete()
+    return redirect('home')
 
 @login_required
-def delete_class():
-    pass 
+@teacher_required('home')
+def delete_class(request,classroom_id):
+    classroom = Classrooms.objects.get(pk=classroom_id)
+    teacher_mapping = Teachers.objects.get(teacher_id=request.user,classroom_id=classroom)
+    teacher_mapping.delete()
+    classroom.delete()
+    return redirect('home')
 
+@login_required
 @access_class('home')
-@login_required
 def render_class(request,id):
     classroom = Classrooms.objects.get(pk=id)
     try: 
@@ -63,6 +77,7 @@ def render_class(request,id):
     return render(request,'base/class_page.html',{'classroom':classroom,'assignments':assignments,'students':students,'teachers':teachers,"mappings":mappings})
 
 @login_required
+@teacher_required('home')
 def assignment_summary(request,assignment_id):
     assignment = Assignments.objects.filter(pk = assignment_id).first()
     submissions = Submissions.objects.filter(assignment_id = assignment_id)

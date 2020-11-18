@@ -11,5 +11,8 @@ urlpatterns = [
     path('join_class/',views.join_class,name='join_class'),
     path('class/<int:id>',views.render_class,name='render_class'),
     path('create_assignment/<int:classroom_id>',views.create_assignment,name='create_assignment'),
-    path('assignment_summary/<int:assignment_id>',views.assignment_summary,name='assignment_summary')
+    path('assignment_summary/<int:assignment_id>',views.assignment_summary,name='assignment_summary'),
+    path('delete_assignment/<int:assignment_id',views.delete_assignment,name='delete_assignment'),
+    path('unenroll_class/<int:classroom_id>',views.unenroll_class,name='unenroll_class'),
+    path('delete_class/<int:classroom_id>',views.delete_class,name='delete_class'),
 ]
