@@ -6,7 +6,7 @@ from .models import Classrooms,Students,Teachers,Assignments
 def access_class(redirect_to):
     def _method_wrapper(view_method):
         def _arguments_wrapper(request,*args, **kwargs):
-            not_a_teacher,not_a_student = False,False
+            is_a_teacher,is_a_student = False,False
             try:
                 classroom = Classrooms.objects.get(id=kwargs['id'])
             except Exception as e:
@@ -14,13 +14,13 @@ def access_class(redirect_to):
 
             teacher_count = Teachers.objects.filter(teacher_id=request.user.id, classroom_id=classroom).count()
             if teacher_count > 0:
-                not_a_teacher = True
+                is_a_teacher = True
 
             student_count = Students.objects.filter(student_id=request.user.id, classroom_id=classroom).count()
             if student_count > 0:
-                not_a_student = True 
+                is_a_student = True 
 
-            if not (not_a_student or not_a_teacher):
+            if not (is_a_student or is_a_teacher):
                 return redirect('home')
 
             return view_method(request, *args, **kwargs)
@@ -65,9 +65,9 @@ def teacher_required(redirect_to):
 def student_required(redirect_to):
     def _method_wrapper(view_method):
         def _arguments_wrapper(request, *args, **kwargs):
-            if kwargs['classroo_id']:
+            if kwargs.get('classroom_id'):
                 query_id = kwargs['classroom_id']
-            elif kwargs['assignment_id']:
+            elif kwargs.get('assignment_id'):
                 try:
                     assignment = Assignment.objects.get(pk=kwargs['assignment_id'])
                 except Exception as e:
