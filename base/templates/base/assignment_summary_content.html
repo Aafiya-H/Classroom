@@ -2,11 +2,3 @@
 {% load static %}
 {% block head %}
 {% endblock %}
-
-{% block ham %}
-    {% if mappings %}
-        {% for mapping in mappings %}
-            <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name}}</li></a>
-        {% endfor %}
-    {% endif %}
-{% endblock %}
