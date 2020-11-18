@@ -27,10 +27,12 @@
               <a href="#"><img class="plus_button" src="{% static 'images/plus.svg' %}"/></a>
             </li> -->
             <li class="nav-item active">
-              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'create_class' %}">Add Class</a></button></a>
+              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'create_class' %}">Create Class</a></button></a>
+              <!-- <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'create_class' %}">Create Class</a></button></a> -->
             </li>
             <li class="nav-item active">
               <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'join_class' %}">Join Class</a></button></a>
+              <!-- <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'create_class' %}">Join Class</a></button></a> -->
             </li>
             <li class="nav-item active">
               <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'logout' %}">Logout</a></button></a>
@@ -50,25 +52,6 @@
       </div>
     </nav>
     <br>
-    <div class="modal" tabindex="-1" id="modela-signup">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
     
     <!-- <nav role="navigation">
         <div id="menuToggle">

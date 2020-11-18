@@ -27,7 +27,9 @@ def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
-    return render(request,'base/home.html',{'mappings':mappings}) 
+    create_class_form = CreateClassForm()
+    join_class_form = JoinClassForm()
+    return render(request,'base/home.html',{'mappings':mappings,'create_class_form':create_class_form,'join_class_form':join_class_form}) 
 
 @login_required
 @teacher_required('home')
