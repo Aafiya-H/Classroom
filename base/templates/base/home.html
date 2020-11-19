@@ -11,19 +11,15 @@
             {% if forloop.counter|divisibleby:4 %}
                     <div class="col-md-3">
                         <div class="card custom_card card-margin" style="width: 18rem;">
-                            <div class="d-flex flex-wrap align-items-center justify-content-center card-background">
-                                <img class="card-img-top card-background" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
-                                <div class="img-overlay"><a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2>{{ mapping.classroom_id.classroom_name }}</a> </h2> </div>
-                            </div>
-                            <div class="card-body">
-                            <!-- <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p> -->
-                            {% if mapping.teacher_id %}
-                                <p class="card-text">{{ mapping.teacher_id}}</p>
-                            {% else %}
-                                <p class="card-text">{{ mapping.student_id }}</p>
-                            {% endif %}
-                            <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
-                            <p class="card-text">{{ mapping.classroom_id.section }}</p>  
+                            <!-- <div> -->
+                                    <div class="img-as-background">
+                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }} upar</h2> </a> 
+                                        {% if mapping.teacher_id %}
+                                            <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
+                                        {% endif %}    
+                                    </div>
+                            <!-- </div> -->
+                            <div class="card-body card-text"><i>{{ mapping.classroom_id.section }}</i>
                             </div>
                         </div>
                     </div>
@@ -33,24 +29,20 @@
     <div class="row">
     {% endif %}
             {% else %}
-                <div class="col-md-3">
-                    <div class="card custom_card" style="width: 18rem;">
-                        <div class="d-flex flex-wrap align-items-center justify-content-center card-background">
-                            <img class="card-img-top card-background" src="{% static 'images/home_page/img_bookclub.jpg' %}"/>
-                            <div class="img-overlay"><a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2>{{ mapping.classroom_id.classroom_name }}</a> </h2> </div>
-                        </div>
-                        <div class="card-body">
-                        <!-- <p class="card-text">{{ mapping.classroom_id.classroom_name }}</p> -->
-                        {% if mapping.teacher_id %}
-                            <p class="card-text">{{ mapping.teacher_id}}</p>
-                        {% else %}
-                            <p class="card-text">{{ mapping.student_id }}</p>
-                        {% endif %}
-                        <p class="card-text">{{ mapping.classroom_id.classroom_id.code }}</p>
-                        <p class="card-text">{{ mapping.classroom_id.section }}</p>  
-                        </div>
-                    </div>
+            <div class="col-md-3">
+                <div class="card custom_card card-margin" style="width: 18rem;">
+                    <!-- <div> -->
+                            <div class="img-as-background">
+                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }} niche</h2> </a> 
+                                {% if mapping.teacher_id %}
+                                    <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
+                                {% endif %}    
+                            </div>
+                    <!-- </div> -->
+
+                    <div class="card-body card-text"><i>{{ mapping.classroom_id.section }}</i></div>
                 </div>
+            </div>
             {% endif %}
         {% endfor %}
     </div>

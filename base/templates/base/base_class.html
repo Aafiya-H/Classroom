@@ -37,14 +37,28 @@
                 <li class="nav-item">
                     <a class="nav-link mybtn myinfo" href="{% url 'create_assignment' classroom_id=classroom.id %}">Create Assignment</a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link mybtn myinfo" href="{% url 'delete_class' classroom_id=classroom.id %}">Delete Class</a>
+                </li>
               {% endif %}
               {% endfor %}
               <li class="nav-item">
                 <a class="nav-link mybtn myinfo" href="{% url 'home' %}">Home</a>
               </li>
+              
+              {% for student in students %}
+              {% if student.student_id.id == user.id %}
+              <li class="nav-item">
+                <a class="nav-link mybtn myinfo" href="{% url 'unenroll_class' classroom_id=classroom.id %}">Unenroll Class</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+
               <li class="nav-item active">
                 <a class="nav-link mybtn myinfo" href="{% url 'logout' %}">Logout<span class="sr-only"></span></a>
               </li>
+              
             </ul>
         </div>
     </nav>
