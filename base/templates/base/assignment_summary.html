@@ -53,8 +53,9 @@
         <h5 class="card-title">{{ submission.student_id.student_id.username }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ submission.submitted_date }}</h6>
         <h6 class="card-subtitle mb-2 text-muted">{{ submission.marks_alloted }}</h6>
-        <h6 class="card-subtitle mb-2 text-muted">{{ submission.submission_file }}</h6>
-    </div>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">{{ submission.submission_file }}</h6> -->
+        <a  href="{% get_media_prefix %}{{ submission.submission_file }}" download> Download submitted file </a>
+      </div>
     {% endfor %}
     </div>
 </body>

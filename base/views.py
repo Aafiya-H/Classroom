@@ -93,7 +93,7 @@ def assignment_summary(request,assignment_id):
 # @student_required('home')
 def assignment_submission(request,assignment_id):
     if request.method == 'POST':
-        form = SubmitAssignmentForm(request.POST)
+        form = SubmitAssignmentForm(request.POST,request.FILES)
         if form.is_valid():
             assignment = Assignments.objects.get(pk=assignment_id)
             # classroom = Classrooms.objects.get(pk=Assignment.classroom.classroom_id)
@@ -106,12 +106,6 @@ def assignment_submission(request,assignment_id):
             return render(request,'base/home.html')
     form = SubmitAssignmentForm()
     return render(request,'base/submit_assignment.html',{'form':form})
-
-
-
-
-
-
 
 @login_excluded('home')  
 def login_view(request):

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('login/', views.login_view,name='login'),
@@ -16,4 +18,4 @@ urlpatterns = [
     path('unenroll_class/<int:classroom_id>',views.unenroll_class,name='unenroll_class'),
     path('delete_class/<int:classroom_id>',views.delete_class,name='delete_class'),
     path('submit_assignment/<int:assignment_id>',views.assignment_submission,name='submit_assignment'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

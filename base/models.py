@@ -35,4 +35,4 @@ class Submissions(models.Model):
     submitted_date=models.DateField(auto_now_add=True)
     submitted_on_time=models.BooleanField(default=True)
     marks_alloted=models.IntegerField(default=0)
-    submission_file = models.TextField()
+    submission_file = models.FileField(upload_to='documents')

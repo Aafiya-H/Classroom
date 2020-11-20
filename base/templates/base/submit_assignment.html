@@ -15,7 +15,7 @@
 {% block content_right %}
     <div class="login-page">
         <div class="myform">
-        <form class="login-form" method="POST">
+        <form class="login-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{form|crispy}}
             <button type='submit'>

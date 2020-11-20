@@ -18,7 +18,7 @@ class CreateAssignmentForm(forms.Form):
     total_marks = forms.IntegerField(label='Total Marks')
 
 class SubmitAssignmentForm(forms.Form):
-    submission_file = forms.CharField(label='Submission',widget=forms.Textarea)
+    submission_file = forms.FileField()
 
 class UserRegisterationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
