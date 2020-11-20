@@ -5,6 +5,23 @@
     border: 1px blue solid;
 }
 
+.img-as-background{
+    background-image: linear-gradient(to bottom right, rgb(16, 6, 107), rgb(101, 164, 189));
+    border-radius: 20px 20px 0px 0px !important;
+    /* resize:both; */
+    /* background: rgb(25, 131, 48); */
+}
+
+.class-name-style{
+    text-align: center;
+    color: white;
+}
+
+.section-style{
+    text-align: center;
+    color: white;
+}
+
 .myheader {
     height: 30%;
     background: blue;
@@ -39,9 +56,6 @@ position: absolute;
 z-index: 1;
 }
 
-.card-background{
-    border-radius: 10px 10px 0px 0px !important;
-}
 
 .card-margin{
     margin-right: 50px !important;
