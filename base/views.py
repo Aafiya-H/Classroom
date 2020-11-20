@@ -167,6 +167,10 @@ def join_class(request):
 @teacher_required('home')
 @login_required
 def create_assignment(request,classroom_id):
+    teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+    student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    mappings = chain(teacher_mapping,student_mapping)
+
     if request.method == 'POST':
         form = CreateAssignmentForm(request.POST)
         if form.is_valid():
@@ -179,6 +183,6 @@ def create_assignment(request,classroom_id):
             assignment.save()
             return redirect('render_class',id=classroom_id.id)
         else:
-            return render(request,'base/create_assignment.html',{'form':form})
+            return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
     form = CreateAssignmentForm()
-    return render(request,'base/create_assignment.html',{'form':form}) 
+    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings}) 
