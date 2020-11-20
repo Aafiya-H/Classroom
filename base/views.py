@@ -130,12 +130,25 @@ def logout_view(request):
 
 @login_required
 def create_class(request):
+    classrooms = Classrooms.objects.all()
+    print(classrooms)
+    existing_codes=[]
+    for classroom in classrooms:
+        existing_codes.append(classroom.class_code)
+    print(existing_codes)
+
     if request.method == 'POST':
         form = CreateClassForm(request.POST)
         if form.is_valid():
             class_name = form.cleaned_data.get('class_name')
             section = form.cleaned_data.get('section')
-            class_code = generate_class_code(6)
+            class_code = generate_class_code(6,existing_codes)
+
+            print('*'*-20)
+            print(type(existing_codes[0]))
+            print(type(class_code))
+            print('*'*-20)
+
             classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
             classroom.save()
             teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
