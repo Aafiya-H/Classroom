@@ -99,7 +99,7 @@ def assignment_submission(request,assignment_id):
             # classroom = Classrooms.objects.get(pk=Assignment.classroom.classroom_id)
             student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
             file_name = form.cleaned_data.get('submission_file')
-            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name,is_submitted=True)
             submission.save()
             return redirect('render_class',id=assignment.classroom_id.id)
         else:
