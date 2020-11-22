@@ -130,12 +130,25 @@ def logout_view(request):
 
 @login_required
 def create_class(request):
+    classrooms = Classrooms.objects.all()
+    print(classrooms)
+    existing_codes=[]
+    for classroom in classrooms:
+        existing_codes.append(classroom.class_code)
+    print(existing_codes)
+
     if request.method == 'POST':
         form = CreateClassForm(request.POST)
         if form.is_valid():
             class_name = form.cleaned_data.get('class_name')
             section = form.cleaned_data.get('section')
-            class_code = generate_class_code(6)
+            class_code = generate_class_code(6,existing_codes)
+
+            print('*'*-20)
+            print(type(existing_codes[0]))
+            print(type(class_code))
+            print('*'*-20)
+
             classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
             classroom.save()
             teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
@@ -167,6 +180,10 @@ def join_class(request):
 @teacher_required('home')
 @login_required
 def create_assignment(request,classroom_id):
+    teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
+    student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    mappings = chain(teacher_mapping,student_mapping)
+
     if request.method == 'POST':
         form = CreateAssignmentForm(request.POST)
         if form.is_valid():
@@ -179,6 +196,6 @@ def create_assignment(request,classroom_id):
             assignment.save()
             return redirect('render_class',id=classroom_id.id)
         else:
-            return render(request,'base/create_assignment.html',{'form':form})
+            return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
     form = CreateAssignmentForm()
-    return render(request,'base/create_assignment.html',{'form':form}) 
+    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings}) 
