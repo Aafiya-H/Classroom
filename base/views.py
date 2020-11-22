@@ -82,24 +82,21 @@ def assignment_summary(request,assignment_id):
     assignment = Assignments.objects.filter(pk = assignment_id).first()
     submissions = Submissions.objects.filter(assignment_id = assignment_id)
     teachers = Teachers.objects.filter(classroom_id = assignment.classroom_id)
-
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping)
-    # print(submissions)
     return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
 
 @login_required
-# @student_required('home')
+@student_required('home')
 def assignment_submission(request,assignment_id):
     if request.method == 'POST':
         form = SubmitAssignmentForm(request.POST,request.FILES)
         if form.is_valid():
             assignment = Assignments.objects.get(pk=assignment_id)
-            # classroom = Classrooms.objects.get(pk=Assignment.classroom.classroom_id)
             student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
             file_name = form.cleaned_data.get('submission_file')
-            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name,is_submitted=True)
+            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
             submission.save()
             return redirect('render_class',id=assignment.classroom_id.id)
         else:
@@ -177,8 +174,8 @@ def join_class(request):
     form = JoinClassForm()
     return render(request,'base/join_class.html',{'form':form})
 
-@teacher_required('home')
 @login_required
+@teacher_required('home')
 def create_assignment(request,classroom_id):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')

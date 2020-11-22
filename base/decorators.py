@@ -65,11 +65,12 @@ def teacher_required(redirect_to):
 def student_required(redirect_to):
     def _method_wrapper(view_method):
         def _arguments_wrapper(request, *args, **kwargs):
+            print(kwargs)
             if kwargs.get('classroom_id'):
                 query_id = kwargs['classroom_id']
             elif kwargs.get('assignment_id'):
                 try:
-                    assignment = Assignment.objects.get(pk=kwargs['assignment_id'])
+                    assignment = Assignments.objects.get(pk=int(kwargs['assignment_id']))
                 except Exception as e:
                     return redirect('home')
                 query_id = assignment.classroom_id.id  
@@ -80,7 +81,6 @@ def student_required(redirect_to):
                 return redirect('render_class',id=query_id)
 
             student_count = Students.objects.filter(student_id=request.user,classroom_id=classroom).count()
-            print(student_count)
             if student_count == 0:
                 return redirect('render_class',id=query_id)
             return view_method(request,*args,**kwargs)
