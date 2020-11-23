@@ -8,6 +8,7 @@ from .utils import generate_class_code
 from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
 from .forms import *     
+from .email import *
 
 from itertools import chain
 
@@ -90,23 +91,6 @@ def assignment_summary(request,assignment_id):
     mappings = chain(teacher_mapping,student_mapping)
     return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
 
-@login_required
-@student_required('home')
-def assignment_submission(request,assignment_id):
-    if request.method == 'POST':
-        form = SubmitAssignmentForm(request.POST,request.FILES)
-        if form.is_valid():
-            assignment = Assignments.objects.get(pk=assignment_id)
-            student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
-            file_name = form.cleaned_data.get('submission_file')
-            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
-            submission.save()
-            return redirect('render_class',id=assignment.classroom_id.id)
-        else:
-            return render(request,'base/home.html')
-    form = SubmitAssignmentForm()
-    return render(request,'base/submit_assignment.html',{'form':form})
-
 @login_excluded('home')  
 def login_view(request):
     if request.method=="POST":
@@ -127,47 +111,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
-# @login_required
-# def create_class(request):
-#     classrooms = Classrooms.objects.all()
-#     existing_codes=[]
-#     for classroom in classrooms:
-#         existing_codes.append(classroom.class_code)
-
-#     if request.method == 'POST':
-#         form = CreateClassForm(request.POST)
-#         if form.is_valid():
-#             class_name = form.cleaned_data.get('class_name')
-#             section = form.cleaned_data.get('section')
-#             class_code = generate_class_code(6,existing_codes)
-#             classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
-#             classroom.save()
-#             teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
-#             teacher.save()
-#             return redirect('home')
-#         else:
-#             return render(request,'base/create_class.html',{'form':form}) 
-#     form = CreateClassForm()
-#     return render(request,'base/create_class.html',{'form':form})
-
-# @login_required
-# def join_class(request):
-#     if request.method == 'POST':
-#         form = JoinClassForm(request.POST)
-#         if form.is_valid():
-#             code = form.cleaned_data.get('code')
-#             try:
-#                 classroom = Classrooms.objects.get(class_code=code)
-#             except Exception as e:
-#                 return redirect('home')
-#             student = Students(student_id = request.user, classroom_id = classroom)
-#             student.save()
-#             return redirect('home')
-#         else:
-#             return render(request,'base/join_class.html',{'form':form})
-#     form = JoinClassForm()
-#     return render(request,'base/join_class.html',{'form':form})
 
 @login_required
 @teacher_required('home')
@@ -234,3 +177,7 @@ def submit_assignment_request(request,assignment_id):
     submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
     submission.save()
     return JsonResponse({'status':'SUCCESS'})
+
+def temp_mail_view(request): 
+    send_email('talha.c@somaiya.edu','Test Email using django')
+    return redirect('home')

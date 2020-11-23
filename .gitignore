@@ -2,3 +2,4 @@ project_venv/
 db.sqlite3
 env/
 media/
+.env
