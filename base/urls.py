@@ -20,4 +20,5 @@ urlpatterns = [
     path('submit_assignment/<int:assignment_id>',views.assignment_submission,name='submit_assignment'),
     path('create_class_request/',views.create_class_request,name='create_class_request'),
     path('join_class_request/',views.join_class_request,name='join_class_request'),
+    path('submit_assignment_request/<int:assignment_id>',views.submit_assignment_request,name='submit_assignment_request'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

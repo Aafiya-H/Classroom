@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .utils import generate_class_code
 from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
@@ -28,9 +30,7 @@ def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
-    create_class_form = CreateClassForm()
-    join_class_form = JoinClassForm()
-    return render(request,'base/home.html',{'mappings':mappings, 'create_class_form':create_class_form,'join_class_form':join_class_form}) 
+    return render(request,'base/home.html',{'mappings':mappings}) 
 
 @login_required
 @teacher_required('home')
@@ -192,6 +192,7 @@ def create_assignment(request,classroom_id):
     form = CreateAssignmentForm()
     return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
 
+@login_required
 def create_class_request(request):
     if request.POST.get('action') == 'post':
         classrooms = Classrooms.objects.all()
@@ -209,7 +210,7 @@ def create_class_request(request):
         teacher.save()
         return JsonResponse({'status':'SUCCESS'})
 
-
+@login_required
 def join_class_request(request):
     if request.POST.get('action') == 'post':
         code = request.POST.get('class_code')
@@ -222,3 +223,14 @@ def join_class_request(request):
         student.save()
         print("hello")
         return JsonResponse({'status':'SUCCESS'})
+
+@csrf_exempt
+@login_required
+@student_required('home')
+def submit_assignment_request(request,assignment_id):
+    assignment = Assignments.objects.get(pk=assignment_id)
+    student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
+    file_name = request.FILES.get('myfile')
+    submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+    submission.save()
+    return JsonResponse({'status':'SUCCESS'})
