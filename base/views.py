@@ -11,7 +11,7 @@ from itertools import chain
 @login_excluded('home')
 def register_view(request):
     if request.method=="POST":
-        form=UserRegisterationForm(request.POST)
+        form=UserRegisterationForm(request.POST,request.FILES)
         if form.is_valid():
             user=form.save()
             user_name=form.cleaned_data.get('username')
