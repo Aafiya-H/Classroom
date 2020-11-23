@@ -4,8 +4,15 @@ from .models import *
 import datetime
 
 class CreateClassForm(forms.Form):
-    class_name = forms.CharField(max_length=100,label='class_name')
-    section = forms.CharField(max_length=100,label='section')
+    def __init__(self,*args,**kwargs):
+        super(CreateClassForm,self).__init__()
+        self.fields['class_name'].label=''
+        self.fields['section'].label=''
+        self.fields['class_name'].widget.attrs['placeholder']='Class Name'
+        self.fields['section'].widget.attrs['placeholder']='Section'
+    
+    class_name = forms.CharField(max_length=100,label='Class name')
+    section = forms.CharField(max_length=100,label='Section')
 
 class JoinClassForm(forms.Form):
     code = forms.CharField(max_length=10,label='code')
@@ -43,7 +50,6 @@ class UserRegisterationForm(UserCreationForm):
         fields = ("username","password1","password2",'email','profile_photo')
         help_texts = {
             "username":None,
-
         }
 
 class UserAuthenticationForm(AuthenticationForm):

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from .utils import generate_class_code
 from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
@@ -27,7 +28,9 @@ def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping) 
-    return render(request,'base/home.html',{'mappings':mappings}) 
+    create_class_form = CreateClassForm()
+    join_class_form = JoinClassForm()
+    return render(request,'base/home.html',{'mappings':mappings, 'create_class_form':create_class_form,'join_class_form':join_class_form}) 
 
 @login_required
 @teacher_required('home')
@@ -125,54 +128,46 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-@login_required
-def create_class(request):
-    classrooms = Classrooms.objects.all()
-    print(classrooms)
-    existing_codes=[]
-    for classroom in classrooms:
-        existing_codes.append(classroom.class_code)
-    print(existing_codes)
+# @login_required
+# def create_class(request):
+#     classrooms = Classrooms.objects.all()
+#     existing_codes=[]
+#     for classroom in classrooms:
+#         existing_codes.append(classroom.class_code)
 
-    if request.method == 'POST':
-        form = CreateClassForm(request.POST)
-        if form.is_valid():
-            class_name = form.cleaned_data.get('class_name')
-            section = form.cleaned_data.get('section')
-            class_code = generate_class_code(6,existing_codes)
+#     if request.method == 'POST':
+#         form = CreateClassForm(request.POST)
+#         if form.is_valid():
+#             class_name = form.cleaned_data.get('class_name')
+#             section = form.cleaned_data.get('section')
+#             class_code = generate_class_code(6,existing_codes)
+#             classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
+#             classroom.save()
+#             teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
+#             teacher.save()
+#             return redirect('home')
+#         else:
+#             return render(request,'base/create_class.html',{'form':form}) 
+#     form = CreateClassForm()
+#     return render(request,'base/create_class.html',{'form':form})
 
-            print('*'*-20)
-            print(type(existing_codes[0]))
-            print(type(class_code))
-            print('*'*-20)
-
-            classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
-            classroom.save()
-            teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
-            teacher.save()
-            return redirect('home')
-        else:
-            return render(request,'base/create_class.html',{'form':form}) 
-    form = CreateClassForm()
-    return render(request,'base/create_class.html',{'form':form})
-
-@login_required
-def join_class(request):
-    if request.method == 'POST':
-        form = JoinClassForm(request.POST)
-        if form.is_valid():
-            code = form.cleaned_data.get('code')
-            try:
-                classroom = Classrooms.objects.get(class_code=code)
-            except Exception as e:
-                return redirect('home')
-            student = Students(student_id = request.user, classroom_id = classroom)
-            student.save()
-            return redirect('home')
-        else:
-            return render(request,'base/join_class.html',{'form':form})
-    form = JoinClassForm()
-    return render(request,'base/join_class.html',{'form':form})
+# @login_required
+# def join_class(request):
+#     if request.method == 'POST':
+#         form = JoinClassForm(request.POST)
+#         if form.is_valid():
+#             code = form.cleaned_data.get('code')
+#             try:
+#                 classroom = Classrooms.objects.get(class_code=code)
+#             except Exception as e:
+#                 return redirect('home')
+#             student = Students(student_id = request.user, classroom_id = classroom)
+#             student.save()
+#             return redirect('home')
+#         else:
+#             return render(request,'base/join_class.html',{'form':form})
+#     form = JoinClassForm()
+#     return render(request,'base/join_class.html',{'form':form})
 
 @login_required
 @teacher_required('home')
@@ -195,4 +190,35 @@ def create_assignment(request,classroom_id):
         else:
             return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
     form = CreateAssignmentForm()
-    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings}) 
+    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
+
+def create_class_request(request):
+    if request.POST.get('action') == 'post':
+        classrooms = Classrooms.objects.all()
+        existing_codes=[]
+        for classroom in classrooms:
+            existing_codes.append(classroom.class_code)
+        
+        class_name = request.POST.get('class_name')
+        section = request.POST.get('section')
+
+        class_code = generate_class_code(6,existing_codes)
+        classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
+        classroom.save()
+        teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
+        teacher.save()
+        return JsonResponse({'status':'SUCCESS'})
+
+
+def join_class_request(request):
+    if request.POST.get('action') == 'post':
+        code = request.POST.get('class_code')
+        try:
+            classroom = Classrooms.objects.get(class_code=code)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'status':'FAIL','message':str(e)})
+        student = Students(student_id = request.user, classroom_id = classroom)
+        student.save()
+        print("hello")
+        return JsonResponse({'status':'SUCCESS'})
