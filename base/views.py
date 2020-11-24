@@ -164,7 +164,6 @@ def join_class_request(request):
             return JsonResponse({'status':'FAIL','message':str(e)})
         student = Students(student_id = request.user, classroom_id = classroom)
         student.save()
-        print("hello")
         return JsonResponse({'status':'SUCCESS'})
 
 @csrf_exempt
@@ -181,3 +180,13 @@ def submit_assignment_request(request,assignment_id):
 def temp_mail_view(request): 
     send_email('talha.c@somaiya.edu','Test Email using django')
     return redirect('home')
+
+def mark_submission_request(request,submission_id):
+    if request.POST.get('action') == 'post':
+        marks = request.POST.get('submission_marks')
+        submission = Submissions.objects.get(pk=submission_id)
+        submission.marks_alloted = marks
+        submission.save()
+        print("submitted")
+        return JsonResponse({'status':'SUCCESS'})
+        

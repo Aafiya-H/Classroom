@@ -18,5 +18,6 @@ urlpatterns = [
     path('create_class_request/',views.create_class_request,name='create_class_request'),
     path('join_class_request/',views.join_class_request,name='join_class_request'),
     path('submit_assignment_request/<int:assignment_id>',views.submit_assignment_request,name='submit_assignment_request'),
-    path('mail',views.temp_mail_view,name='mail_view')
+    path('mail',views.temp_mail_view,name='mail_view'),
+    path('mark_submission_request/<int:submission_id>',views.mark_submission_request,name='mark_submission_request')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
