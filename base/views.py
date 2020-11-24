@@ -8,7 +8,7 @@ from .utils import generate_class_code
 from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
 from .forms import *     
-from .email import *
+from . import email
 
 from itertools import chain
 
@@ -129,6 +129,7 @@ def create_assignment(request,classroom_id):
             total_marks = form.cleaned_data.get('total_marks')
             assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
+            email.assignment_post_mail(classroom_id,assignment.id)
             return redirect('render_class',id=classroom_id.id)
         else:
             return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
@@ -175,18 +176,19 @@ def submit_assignment_request(request,assignment_id):
     file_name = request.FILES.get('myfile')
     submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
     submission.save()
+    email.submission_done_mail(assignment_id,request.user,file_name)
     return JsonResponse({'status':'SUCCESS'})
 
 def temp_mail_view(request): 
     send_email('talha.c@somaiya.edu','Test Email using django')
     return redirect('home')
 
-def mark_submission_request(request,submission_id):
+def mark_submission_request(request,submission_id,teacher_id):
     if request.POST.get('action') == 'post':
         marks = request.POST.get('submission_marks')
         submission = Submissions.objects.get(pk=submission_id)
         submission.marks_alloted = marks
         submission.save()
-        print("submitted")
+        email.submission_marks_mail(submission_id,teacher_id,marks)
         return JsonResponse({'status':'SUCCESS'})
         

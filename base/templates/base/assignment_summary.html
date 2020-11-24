@@ -58,7 +58,8 @@
             <a href="#mark_assignment">Mark Submission</a>
             <input type="hidden" id="submission_id" name="submission_id" value="{{ submission.id }}">
             <input type="hidden" id="assignment_id" name="assignment_id" value="{{ submission.assignment_id.id }}">
-        </div>
+            <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
+          </div>
         <br>
       {% endfor %}
     </div>
@@ -92,7 +93,9 @@
 
     $('#mark_assignment_form').on('submit', function (e) {
         var submission_id = document.getElementById('submission_id').value;    
-        var mark_assignment_url =  "{% url 'mark_submission_request' submission_id=0 %}".replace('0', submission_id);
+        var user_id = document.getElementById('user_id').value;    
+        var mark_assignment_url =  "{% url 'mark_submission_request' submission_id=0 teacher_id=0 %}".replace('0', submission_id);
+        mark_assignment_url = mark_assignment_url.replace('0',user_id)
         var assignment_id = document.getElementById('assignment_id').value;   
         $.ajax({
             type:'POST',
@@ -121,4 +124,4 @@
         });
       });
 </script>
-</html>
+</html> 
