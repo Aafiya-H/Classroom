@@ -12,6 +12,9 @@ from . import email
 
 from itertools import chain
 
+def landing_page(request):
+    return render(request,'base/landing.html')
+
 @login_excluded('home')
 def register_view(request):
     if request.method=="POST":
@@ -70,7 +73,7 @@ def render_class(request,id):
         assignments = None
 
     try:
-        students = Students.objects.filter( classroom_id = id)
+        students = Students.objects.filter(classroom_id = id)
     except Exception as e:
         students = None
     
