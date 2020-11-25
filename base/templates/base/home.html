@@ -13,7 +13,7 @@
                         <div class="card custom_card card-margin" style="width: 18rem;">
                             <!-- <div> -->
                                     <div class="img-as-background">
-                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }} upar</h2> </a> 
+                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
                                         {% if mapping.teacher_id %}
                                             <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
                                         {% endif %}    
@@ -33,7 +33,7 @@
                 <div class="card custom_card card-margin" style="width: 18rem;">
                     <!-- <div> -->
                             <div class="img-as-background">
-                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }} niche</h2> </a> 
+                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
                                 {% if mapping.teacher_id %}
                                     <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
                                 {% endif %}    
