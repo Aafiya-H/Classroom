@@ -14,11 +14,12 @@
         {% if assignments %}
             {% for assignment in assignments %}
                 {% for teacher in teachers %}
-                {% if teacher.teacher_id.id == user.id %}
-                <a href="{% url 'assignment_summary' assignment_id=assignment.id %}">
-                {% else %}
-                <a href="{% url 'submit_assignment' assignment_id=assignment.id %}"> 
-                {% endif %}
+                    {% if teacher.teacher_id.id == user.id %}
+                        <a href="{% url 'assignment_summary' assignment_id=assignment.id %}">
+                    {% else %}
+                        <a href="#submit_assignment">
+                        <input type="hidden" id="assignment_id" name="assignment_id" value="{{ assignment.id }}">
+                    {% endif %}
                 {% endfor %}
                 <div class="card assignment_card" style="width: 18rem;">
                 <div class="card-body">
@@ -30,4 +31,26 @@
             {% endfor %}
         {% endif %}
     </div>
+
+    <div class="modal" tabindex="-1" id="submit_assignment">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Submit Assignment</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+             <div class="modal-body">
+                  <form method="POST" class="cclass_form" id="submit_assignment_form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" id="myfile" name="myfile">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Assignment</button>
+                  </form> 
+             </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}

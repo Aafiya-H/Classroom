@@ -56,7 +56,7 @@
             <button>login</button>
             <p class="message">Not registered? <a href="#">Create an account</a></p>
         </form> -->
-            <form class="login-form" method="POST">
+            <form class="login-form" method="POST"  enctype="multipart/form-data">
               {% csrf_token %}
               {{form|crispy}}
               <button class="submit-button" type='submit'><b>Login</b></button>

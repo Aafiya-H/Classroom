@@ -1,5 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+import os 
+
+class CustomUser(AbstractUser):
+    email = models.EmailField()
+    profile_photo = models.ImageField(upload_to='images',blank=True)
+
+    def get_avatar(self):
+        if not self.profile_photo:
+            return  os.path.join(settings.MEDIA_URL, self.profile_photo)
+        else:
+            return os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
+
 # Create your models here.
 class Classrooms(models.Model):
     classroom_name=models.CharField(max_length=100)
@@ -10,11 +23,11 @@ class Classrooms(models.Model):
         return self.classroom_name
 
 class Students(models.Model):
-    student_id=models.ForeignKey(User,on_delete=models.CASCADE)
+    student_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
 
 class Teachers(models.Model):
-    teacher_id=models.ForeignKey(User,on_delete=models.CASCADE)
+    teacher_id=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
 
 class Assignments(models.Model):

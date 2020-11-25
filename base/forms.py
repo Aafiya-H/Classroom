@@ -1,12 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-from . import models
+from .models import *
 import datetime
 
 class CreateClassForm(forms.Form):
-    class_name = forms.CharField(max_length=100,label='class_name')
-    section = forms.CharField(max_length=100,label='section')
+    def __init__(self,*args,**kwargs):
+        super(CreateClassForm,self).__init__()
+        self.fields['class_name'].label=''
+        self.fields['section'].label=''
+        self.fields['class_name'].widget.attrs['placeholder']='Class Name'
+        self.fields['section'].widget.attrs['placeholder']='Section'
+    
+    class_name = forms.CharField(max_length=100,label='Class name')
+    section = forms.CharField(max_length=100,label='Section')
 
 class JoinClassForm(forms.Form):
     code = forms.CharField(max_length=10,label='code')
@@ -24,12 +30,15 @@ class UserRegisterationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserRegisterationForm, self).__init__(*args, **kwargs)
         self.fields['username'].label = ''
+        self.fields['email'].label = ''
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''
+        self.fields['profile_photo'].label = ''
+        self.fields['profile_photo'].widget.attrs['placeholder'] = 'Profile photo'
+        self.fields['email'].widget.attrs['placeholder'] = 'Email'
         self.fields['username'].widget.attrs['placeholder'] = 'Username'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password2'].widget.attrs['placeholder'] = 'Re-enter Password'
-
 
     password1 = forms.CharField(label='Enter password', 
                                 widget=forms.PasswordInput)
@@ -37,8 +46,8 @@ class UserRegisterationForm(UserCreationForm):
                                 widget=forms.PasswordInput)
  
     class Meta:
-        model = User
-        fields = ("username","password1","password2")
+        model = CustomUser
+        fields = ("username","password1","password2",'email','profile_photo')
         help_texts = {
             "username":None,
         }
@@ -54,9 +63,9 @@ class UserAuthenticationForm(AuthenticationForm):
 
     password = forms.CharField(label='Enter password', 
                                 widget=forms.PasswordInput)
- 
+
     class Meta:
-        model = User
+        model = CustomUser
         fields = ("username","password")
         help_texts = {
             "username":None,

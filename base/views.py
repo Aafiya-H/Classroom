@@ -1,17 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .utils import generate_class_code
 from .decorators import access_class,login_excluded,teacher_required,student_required
 from .models import * 
 from .forms import *     
+from . import email
 
 from itertools import chain
+
+def landing_page(request):
+    return render(request,'base/landing.html')
 
 @login_excluded('home')
 def register_view(request):
     if request.method=="POST":
-        form=UserRegisterationForm(request.POST)
+        form=UserRegisterationForm(request.POST,request.FILES)
         if form.is_valid():
             user=form.save()
             user_name=form.cleaned_data.get('username')
@@ -66,7 +73,7 @@ def render_class(request,id):
         assignments = None
 
     try:
-        students = Students.objects.filter( classroom_id = id)
+        students = Students.objects.filter(classroom_id = id)
     except Exception as e:
         students = None
     
@@ -82,30 +89,10 @@ def assignment_summary(request,assignment_id):
     assignment = Assignments.objects.filter(pk = assignment_id).first()
     submissions = Submissions.objects.filter(assignment_id = assignment_id)
     teachers = Teachers.objects.filter(classroom_id = assignment.classroom_id)
-
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
     mappings = chain(teacher_mapping,student_mapping)
-    # print(submissions)
     return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
-
-@login_required
-# @student_required('home')
-def assignment_submission(request,assignment_id):
-    if request.method == 'POST':
-        form = SubmitAssignmentForm(request.POST,request.FILES)
-        if form.is_valid():
-            assignment = Assignments.objects.get(pk=assignment_id)
-            # classroom = Classrooms.objects.get(pk=Assignment.classroom.classroom_id)
-            student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
-            file_name = form.cleaned_data.get('submission_file')
-            submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
-            submission.save()
-            return redirect('render_class',id=assignment.classroom_id.id)
-        else:
-            return render(request,'base/home.html')
-    form = SubmitAssignmentForm()
-    return render(request,'base/submit_assignment.html',{'form':form})
 
 @login_excluded('home')  
 def login_view(request):
@@ -129,56 +116,7 @@ def logout_view(request):
     return redirect('login')
 
 @login_required
-def create_class(request):
-    classrooms = Classrooms.objects.all()
-    print(classrooms)
-    existing_codes=[]
-    for classroom in classrooms:
-        existing_codes.append(classroom.class_code)
-    print(existing_codes)
-
-    if request.method == 'POST':
-        form = CreateClassForm(request.POST)
-        if form.is_valid():
-            class_name = form.cleaned_data.get('class_name')
-            section = form.cleaned_data.get('section')
-            class_code = generate_class_code(6,existing_codes)
-
-            print('*'*-20)
-            print(type(existing_codes[0]))
-            print(type(class_code))
-            print('*'*-20)
-
-            classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
-            classroom.save()
-            teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
-            teacher.save()
-            return redirect('home')
-        else:
-            return render(request,'base/create_class.html',{'form':form}) 
-    form = CreateClassForm()
-    return render(request,'base/create_class.html',{'form':form})
-
-@login_required
-def join_class(request):
-    if request.method == 'POST':
-        form = JoinClassForm(request.POST)
-        if form.is_valid():
-            code = form.cleaned_data.get('code')
-            try:
-                classroom = Classrooms.objects.get(class_code=code)
-            except Exception as e:
-                return redirect('home')
-            student = Students(student_id = request.user, classroom_id = classroom)
-            student.save()
-            return redirect('home')
-        else:
-            return render(request,'base/join_class.html',{'form':form})
-    form = JoinClassForm()
-    return render(request,'base/join_class.html',{'form':form})
-
 @teacher_required('home')
-@login_required
 def create_assignment(request,classroom_id):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
@@ -194,8 +132,66 @@ def create_assignment(request,classroom_id):
             total_marks = form.cleaned_data.get('total_marks')
             assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
+            email.assignment_post_mail(classroom_id,assignment.id)
             return redirect('render_class',id=classroom_id.id)
         else:
             return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
     form = CreateAssignmentForm()
-    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings}) 
+    return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
+
+@login_required
+def create_class_request(request):
+    if request.POST.get('action') == 'post':
+        classrooms = Classrooms.objects.all()
+        existing_codes=[]
+        for classroom in classrooms:
+            existing_codes.append(classroom.class_code)
+        
+        class_name = request.POST.get('class_name')
+        section = request.POST.get('section')
+
+        class_code = generate_class_code(6,existing_codes)
+        classroom = Classrooms(classroom_name=class_name,section=section,class_code=class_code)
+        classroom.save()
+        teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
+        teacher.save()
+        return JsonResponse({'status':'SUCCESS'})
+
+@login_required
+def join_class_request(request):
+    if request.POST.get('action') == 'post':
+        code = request.POST.get('class_code')
+        try:
+            classroom = Classrooms.objects.get(class_code=code)
+        except Exception as e:
+            print(e)
+            return JsonResponse({'status':'FAIL','message':str(e)})
+        student = Students(student_id = request.user, classroom_id = classroom)
+        student.save()
+        return JsonResponse({'status':'SUCCESS'})
+
+@csrf_exempt
+@login_required
+@student_required('home')
+def submit_assignment_request(request,assignment_id):
+    assignment = Assignments.objects.get(pk=assignment_id)
+    student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
+    file_name = request.FILES.get('myfile')
+    submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+    submission.save()
+    email.submission_done_mail(assignment_id,request.user,file_name)
+    return JsonResponse({'status':'SUCCESS'})
+
+def temp_mail_view(request): 
+    send_email('talha.c@somaiya.edu','Test Email using django')
+    return redirect('home')
+
+def mark_submission_request(request,submission_id,teacher_id):
+    if request.POST.get('action') == 'post':
+        marks = request.POST.get('submission_marks')
+        submission = Submissions.objects.get(pk=submission_id)
+        submission.marks_alloted = marks
+        submission.save()
+        email.submission_marks_mail(submission_id,teacher_id,marks)
+        return JsonResponse({'status':'SUCCESS'})
+        
