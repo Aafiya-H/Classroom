@@ -179,7 +179,9 @@ def submit_assignment_request(request,assignment_id):
     file_name = request.FILES.get('myfile')
     try:
         submission = Submissions.objects.get(assignment_id=assignment, student_id = student_id)
-        print('hello')
+        print('-'*20)
+        print('hello from submit_assignment_request')
+        print('-'*20)
         submission.submission_file = file_name
         submission.save()
         return JsonResponse({'status':'SUCCESS'})
@@ -198,6 +200,11 @@ def temp_mail_view(request):
 def mark_submission_request(request,submission_id,teacher_id):
     if request.POST.get('action') == 'post':
         marks = request.POST.get('submission_marks')
+        print('-'*20)
+        print('From mark_submission_request')
+        print(marks)
+        print(submission_id)
+        print('-'*20)
         submission = Submissions.objects.get(pk=submission_id)
         submission.marks_alloted = marks
         submission.save()

@@ -61,7 +61,7 @@
             <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
           </div>
         <br>
-      {% endfor %}
+      
     </div>
 
     <div class="modal" tabindex="-1" id="mark_assignment">
@@ -85,6 +85,7 @@
         </div>
       </div>
     </div>
+    {% endfor %}
 </body>
 <script>
    $('a[href$="#mark_assignment"]').on( "click", function() {
@@ -94,7 +95,7 @@
     $('#mark_assignment_form').on('submit', function (e) {
         var submission_id = document.getElementById('submission_id').value;    
         var user_id = document.getElementById('user_id').value;    
-        var mark_assignment_url =  "{% url 'mark_submission_request' submission_id=0 teacher_id=0 %}".replace('0', submission_id);
+        var mark_assignment_url =  "{% url 'mark_submission_request' submission_id=1 teacher_id=0 %}".replace('1', submission_id);
         mark_assignment_url = mark_assignment_url.replace('0',user_id)
         var assignment_id = document.getElementById('assignment_id').value;   
         $.ajax({
