@@ -177,10 +177,19 @@ def submit_assignment_request(request,assignment_id):
     assignment = Assignments.objects.get(pk=assignment_id)
     student_id = Students.objects.get(classroom_id=assignment.classroom_id,student_id=request.user.id)
     file_name = request.FILES.get('myfile')
-    submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
-    submission.save()
-    # email.submission_done_mail(assignment_id,request.user,file_name)
-    return JsonResponse({'status':'SUCCESS'})
+    try:
+        submission = Submissions.objects.get(assignment_id=assignment, student_id = student_id)
+        print('hello')
+        submission.submission_file = file_name
+        submission.save()
+        return JsonResponse({'status':'SUCCESS'})
+
+    except Exception as e:  
+        print(str(e))  
+        submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+        submission.save()
+        # email.submission_done_mail(assignment_id,request.user,file_name)
+        return JsonResponse({'status':'SUCCESS'})
 
 def temp_mail_view(request): 
     # send_email('talha.c@somaiya.edu','Test Email using django')

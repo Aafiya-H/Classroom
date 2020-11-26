@@ -75,7 +75,7 @@
         var assignment_id = document.getElementById('assignment_id').value;
         var submit_assignment_url =  "{% url 'submit_assignment_request' assignment_id=0 %}".replace('0', assignment_id);
         var formData = new FormData(this);
-        var class_id = '{{assignment_id.classroom_id.id}}'
+        var class_id = '{{assignment_id.classroom_id.id}}';
         var csrftoken = $("[name=csrfmiddlewaretoken]").val();
         formData.append('submission_file',$('#myfile'));
         formData.append('csrfmiddlewaretoken', csrftoken);
