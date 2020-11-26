@@ -132,7 +132,7 @@ def create_assignment(request,classroom_id):
             total_marks = form.cleaned_data.get('total_marks')
             assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
-            email.assignment_post_mail(classroom_id,assignment.id)
+            # email.assignment_post_mail(classroom_id,assignment.id)
             return redirect('render_class',id=classroom_id.id)
         else:
             return render(request,'base/create_assignment.html',{'form':form,'mappings':mappings})
@@ -179,11 +179,11 @@ def submit_assignment_request(request,assignment_id):
     file_name = request.FILES.get('myfile')
     submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
     submission.save()
-    email.submission_done_mail(assignment_id,request.user,file_name)
+    # email.submission_done_mail(assignment_id,request.user,file_name)
     return JsonResponse({'status':'SUCCESS'})
 
 def temp_mail_view(request): 
-    send_email('talha.c@somaiya.edu','Test Email using django')
+    # send_email('talha.c@somaiya.edu','Test Email using django')
     return redirect('home')
 
 def mark_submission_request(request,submission_id,teacher_id):
@@ -192,6 +192,6 @@ def mark_submission_request(request,submission_id,teacher_id):
         submission = Submissions.objects.get(pk=submission_id)
         submission.marks_alloted = marks
         submission.save()
-        email.submission_marks_mail(submission_id,teacher_id,marks)
+        # email.submission_marks_mail(submission_id,teacher_id,marks)
         return JsonResponse({'status':'SUCCESS'})
         

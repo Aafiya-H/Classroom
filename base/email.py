@@ -7,6 +7,7 @@ def send_email(subject,recipient,message):
     if isinstance(recipient,str):
         send_mail(subject,message,EMAIL_HOST_USER,[recipient],fail_silently = False)
     elif isinstance(recipient,list):
+        # print(recipient)
         send_mail(subject,message,EMAIL_HOST_USER,recipient,fail_silently = False)
 
 def submission_marks_mail(submission_id,teacher_id,marks):
@@ -29,6 +30,7 @@ def assignment_post_mail(classroom_id,assignment_id):
     due_date = assignment.due_date
     message = 'Dear Students, {} assignment has been posted to {}. Due date of the assignment is {}'.format(assignment_name,classroom_name,due_date)
     subject = 'New Assignment in {} class'.format(classroom_name)
+    print(email_list)
     send_mail(subject,email_list,message)
 
 def submission_done_mail(assignment_id,user,submitted_file):
