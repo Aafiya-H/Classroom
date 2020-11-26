@@ -5,10 +5,9 @@ from datetime import datetime
 
 def send_email(subject,recipient,message):
     if isinstance(recipient,str):
-        send_mail(subject,message,EMAIL_HOST_USER,[recipient],fail_silently = False)
+        send_mail(subject,message,EMAIL_HOST_USER,recipient_list = [recipient],fail_silently = False)
     elif isinstance(recipient,list):
-        # print(recipient)
-        send_mail(subject,message,EMAIL_HOST_USER,recipient,fail_silently = False)
+        send_mail(subject,message,EMAIL_HOST_USER,recipient_list = recipient,fail_silently = False)
 
 def submission_marks_mail(submission_id,teacher_id,marks):
     teacher_name = CustomUser.objects.get(pk=teacher_id).username
@@ -19,7 +18,7 @@ def submission_marks_mail(submission_id,teacher_id,marks):
     student_email = student_user.email
     email_body = 'Dear, {}, your submission for the assignment {} has been graded {} by Prof. {}'.format(student_username,assignment_name,marks,teacher_name)
     subject = 'Grading for assignment {}'.format(assignment_name)
-    send_mail(subject,student_email,message)
+    send_email(subject,student_email,message)
 
 def assignment_post_mail(classroom_id,assignment_id):
     users = Students.objects.filter(classroom_id = classroom_id)
@@ -30,8 +29,7 @@ def assignment_post_mail(classroom_id,assignment_id):
     due_date = assignment.due_date
     message = 'Dear Students, {} assignment has been posted to {}. Due date of the assignment is {}'.format(assignment_name,classroom_name,due_date)
     subject = 'New Assignment in {} class'.format(classroom_name)
-    print(email_list)
-    send_mail(subject,email_list,message)
+    send_email(subject,email_list,message)
 
 def submission_done_mail(assignment_id,user,submitted_file):
     user_email = user.email 
