@@ -46,7 +46,10 @@
         </div>
         </nav>    
         </div>
-
+    
+    <input type="hidden" id="submission_id" name="submission_id">
+    <input type="hidden" id="assignment_id" name="assignment_id">
+    <input type="hidden" id="user_id" name="user_id" >
     <div class="container_of_submissions">
       {% for submission in submissions %}
         <div class="card-body submission-card">
@@ -55,10 +58,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ submission.marks_alloted }}</h6>
             <a  href="{% get_media_prefix %}{{ submission.submission_file }}" download> Download submitted file </a>
             <br>
-            <a href="#mark_assignment">Mark Submission</a>
-            <input type="hidden" id="submission_id" name="submission_id" value="{{ submission.id }}">
-            <input type="hidden" id="assignment_id" name="assignment_id" value="{{ submission.assignment_id.id }}">
-            <input type="hidden" id="user_id" name="user_id" value="{{ user.id }}">
+            <a href="#mark_assignment" data-submission_value="{{ submission.id }}" data-assignment_value="{{ submission.assignment_id.id }}" data-user_id="{{ user.id }}">Mark Submission</a>
           </div>
         <br>
       
@@ -90,6 +90,19 @@
 <script>
    $('a[href$="#mark_assignment"]').on( "click", function() {
         $('#mark_assignment').modal('show');
+        var assignment_id = $(this).data('assignment_value');
+        var submission_id = $(this).data('submission_value');
+        var user_id = $(this).data('user_id');
+
+        var assignment_hidden_field = document.getElementById('assignment_id');
+        assignment_hidden_field.value = assignment_id;
+
+        var submission_hidden_field = document.getElementById('submission_id');
+        submission_hidden_field.value = submission_id;
+
+        var user_hidden_field = document.getElementById('user_id');
+        user_hidden_field.value = user_id;
+
     });
 
     $('#mark_assignment_form').on('submit', function (e) {
@@ -97,6 +110,7 @@
         var user_id = document.getElementById('user_id').value;    
         var mark_assignment_url =  "{% url 'mark_submission_request' submission_id=1 teacher_id=0 %}".replace('1', submission_id);
         mark_assignment_url = mark_assignment_url.replace('0',user_id)
+        console.log(mark_assignment_url);
         var assignment_id = document.getElementById('assignment_id').value;   
         $.ajax({
             type:'POST',
