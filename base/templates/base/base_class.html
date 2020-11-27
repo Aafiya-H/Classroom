@@ -54,7 +54,6 @@
               </li>
               {% endif %}
               {% endfor %}
-
               <li class="nav-item active">
                 <a class="nav-link mybtn myinfo" href="{% url 'logout' %}">Logout<span class="sr-only"></span></a>
               </li>
@@ -62,12 +61,18 @@
             </ul>
         </div>
     </nav>
+    <div>
+
+    </div>
       {% block hamburger %}
       {% endblock %}
 </body>
 <script>
     $('a[href$="#submit_assignment"]').on( "click", function() {
-        $('#submit_assignment').modal('show');
+      $('#submit_assignment').modal('show');
+      var assignment_id = $(this).data('value');
+      var hidden_field = document.getElementById('assignment_id');
+      hidden_field.value = assignment_id;
     });
 
     $('#submit_assignment_form').on('submit', function (e) {

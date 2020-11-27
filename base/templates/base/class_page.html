@@ -10,6 +10,7 @@
         <p class="lead class_code">Class code: {{ classroom.class_code }}</p>
         </div>
     </div>
+    <input type="hidden" id="assignment_id" name="assignment_id">
     <div class="contatiner_of_assignments">
         {% if assignments %}
             {% for assignment in assignments %}
@@ -17,8 +18,7 @@
                     {% if teacher.teacher_id.id == user.id %}
                         <a href="{% url 'assignment_summary' assignment_id=assignment.id %}">
                     {% else %}
-                        <a href="#submit_assignment">
-                        <input type="hidden" id="assignment_id" name="assignment_id" value="{{ assignment.id }}">
+                        <a href="#submit_assignment" data-value="{{ assignment.id }}">
                     {% endif %}
                 {% endfor %}
                 <div class="card assignment_card" style="width: 18rem;">
