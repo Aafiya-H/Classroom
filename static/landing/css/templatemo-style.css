@@ -1,0 +1,489 @@
+/*
+
+Ocean Theme
+
+http://www.templatemo.com/tm-484-ocean
+
+-----------------------------*/
+body {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	font-size: 19px;
+	font-weight: 300;
+}
+a { color: #81b4eb;  }
+a, button { transition: all 0.3s ease; }
+a:hover,
+a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+/* 1. Intro 
+--------------------*/
+.tm-section-intro {
+	background-image: url(../img/ocean-bg.jpg);
+	background-attachment: fixed;
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: 100% 800px;
+	color: white;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	text-align: center;
+	height: 800px;
+}
+
+.tm-wrapper-center {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+}
+
+/* IE bug fix */
+.tm-wrapper-center > * {
+	-ms-flex: 0 1 auto;
+		-webkit-flex: 0 1 auto;
+	        flex: 0 1 auto;
+}
+
+.tm-section-intro-title {
+	font-size: 4.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.tm-section-intro-text {
+	font-size: 2rem;
+	margin-bottom: 4rem;
+	width: 100%;
+}
+
+.tm-btn-white-big {
+    font-size: 2.4rem;
+    color: #a1c7f1;
+    background-color: white;
+    padding: 0.75rem 2.5rem;
+    border-radius: 0.5rem;
+}
+
+.tm-btn-white-big:hover,
+.tm-btn-white-big:focus {
+	color: white;
+    background-color: #A2D1FF;
+}
+
+/* 2. Carousel 
+-------------------------*/
+.tm-carousel {
+	max-width: 950px;
+    margin: 5rem auto;
+    padding-bottom: 3rem;
+    text-align: center;
+}
+
+.tm-carousel-item-title {
+	color: #81b4eb;
+	font-size: 2.1rem;
+	font-weight: 300;
+	margin-bottom: 3rem;
+}
+
+.tm-carousel-item-text {
+	font-size: 1.3rem;
+    line-height: 1.6;
+    color: #666;
+    font-weight: 300;
+}
+
+.carousel-indicators {
+	bottom: 0;
+	margin-bottom: 0;
+}
+
+.carousel-indicators .active {
+	background-color: #81b4eb;
+	margin: 1px;
+}
+
+.carousel-indicators li {
+	background-color: rgb(205, 215, 226);
+	border-color: rgb(205, 215, 226);	
+}
+
+.carousel-indicators .active,
+.carousel-indicators li {
+	width: 20px;
+    height: 20px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/* 3. Image and text 2 column block 
+-------------------------------------*/
+.tm-2-col-img-text {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	overflow: auto;
+}
+
+.tm-2-col-img {	padding: 0; }
+
+.tm-2-col-img-lg-right .tm-2-col-img {
+	-webkit-order: 2;
+	    -ms-flex-order: 2;
+	        order: 2;
+}
+
+.tm-2-col-img-lg-right .tm-2-col-text {
+	-webkit-order: 1;
+	    -ms-flex-order: 1;
+	        order: 1;
+}
+
+.tm-2-col-text {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: flex-start;
+	    -ms-flex-align: start;
+	        align-items: flex-start;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.tm-2-col-text-title {
+	color: #81b4eb;
+    font-size: 1.9rem;
+    font-weight: 300;
+    margin-bottom: 5%;    
+}
+
+.tm-2-col-text-description {
+	color: #81b4eb;
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.9;    
+    margin-bottom: 6%;
+    width: 100%;
+}
+
+.tm-bordered-btn {
+	background-color: transparent;
+    border: 2px solid #81b4eb;
+    border-radius: 2.5rem;
+    color: #81b4eb;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0.8rem 3.5rem;    
+}
+
+.tm-bordered-btn:hover,
+.tm-bordered-btn:focus {
+	color: white;
+	background-color: #81b4eb;
+}
+
+.tm-2-col-img-lg-left img {
+	margin-right: 0;
+	margin-left: auto;
+}
+
+/* 4. icon and text 4 boxes
+----------------------------*/
+.tm-section {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+}
+
+.tm-blue-bg-row { background-color: #b9d6f4; }
+
+.tm-section-title {
+	font-size: 2.1rem;
+	margin-bottom: 1.8rem;
+}
+
+.tm-section-subtitle {
+	font-size: 1.4rem;
+	line-height: 1.6;
+	max-width: 700px;
+	margin: 0 auto 5rem;
+}
+
+.tm-icon-text-box {
+	background-color: #d3e6f8;
+	border: 1px solid white;
+	padding: 3rem;
+	max-width: 400px;	
+}
+
+.tm-icon-text-box > .fa {
+	color: #81b4eb;
+	margin-bottom: 2rem;
+	width: 100%;
+	text-align: center; /*http://stackoverflow.com/questions/19162889/how-to-center-font-awesome-icons-horizontally*/
+}
+
+.tm-icon-text-boxes-container {
+    max-width: 1760px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+.tm-icon-text-box-title { margin-bottom: 1.4rem; }
+
+.tm-icon-text-box-description {
+	line-height: 1.8;
+	margin-bottom: 0;
+}
+
+/* 5. Contact
+-----------------*/
+.tm-section-contact {
+	margin: 0 auto;
+	max-width: 1500px;
+}
+
+.form-control {
+	padding: .75rem 1.75rem;
+	font-size: 1.2rem;
+	border-radius: 2.5rem;
+	border-color: #68a8e8;
+}
+
+.form-control:focus { border-color: #1768A9; }
+
+textarea.form-control {
+	padding-top: 1.15rem;
+	padding-bottom: 1.15rem;
+}
+
+.tm-form-group-left { padding-left: 0; }
+
+.tm-form-group-right { padding-right: 0; }
+
+.tm-contact-right { padding-left: 3%; }
+
+.tm-contact-title { font-size: 1.6rem; }
+
+.tm-contact-info {
+	line-height: 1.8;
+	margin-bottom: 5%;
+}
+
+.tm-social-icons-container { margin-top: 20px; }
+
+.tm-social-icon-link {
+	background-color: transparent;
+	color: #81b4eb;
+    padding: 5px;
+    border: 1px solid #68a8e8;
+    border-radius: 50%;
+    margin-right: 2%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+.tm-social-icon-link:last-child { margin-right: 0; }
+
+.tm-social-icon-link:hover,
+.tm-social-icon-link:focus {
+	color: white;
+	background-color: #81b4eb; 
+}
+
+hr { width: 65%; }
+
+.tm-copyright-text {
+	color: #999999;
+	font-size: 1.3rem;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+/* 1. Intro 
+-----------------*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* IE10+ CSS styles go here */
+	.tm-section-intro {	background-attachment: scroll; }
+}
+
+@media (max-width: 1900px) {
+	.tm-section-intro {	background-size: 1900px 800px; }
+}
+
+@media (max-height: 800px) {
+	.tm-section-intro {
+		height: 100vh;
+		min-height: 480px;
+	}
+}
+
+@media (max-width: 480px) {
+	.tm-section-intro-title {
+	    font-size: 3.5rem;
+	    margin-bottom: 1.5rem;
+	}
+
+	.tm-section-intro-text {
+		font-size: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.tm-btn-white-big {
+		font-size: 1.6rem;
+		padding: 0.5rem 1.5rem;
+	}
+}
+
+/* 2. Carousel
+----------------------*/
+@media (max-width: 767px) {
+	.tm-carousel {
+		margin-top: 10%;
+		margin-bottom: 10%;
+	}
+}
+
+@media (max-width: 480px) {
+	.tm-carousel {
+		margin-top: 15%;
+		margin-bottom: 15%;
+	}
+	.tm-carousel-item-title {
+		font-size: 2rem;
+		margin-bottom: 1.5rem;
+	}
+}
+
+
+/* 3. Image and text 2 column block
+----------------------------------------*/
+@media (max-width: 1600px) {
+	.tm-2-col-text {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+}
+
+@media (max-width: 1320px) {
+	.tm-2-col-text {
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+
+	.tm-2-col-text-description {
+		font-size: 1.1rem;
+		line-height: 1.6;
+		margin-bottom: 4%;
+	}
+
+	.tm-bordered-btn {
+		font-size: 1.2rem;
+		padding: 0.5rem 2.5rem;
+	}
+}
+
+@media (max-width: 991px) {
+	.tm-2-col-img-text { display: block; }
+
+	.tm-2-col-img img {	margin: 0 auto;	}
+
+	.tm-2-col-text {
+		padding-top: 5%;
+		padding-bottom: 5%;
+	}
+
+	.tm-2-col-text-title {
+	    font-size: 1.8rem;
+	    margin-bottom: 1rem;
+	}
+
+	.tm-2-col-text-description {
+		font-size: 1.4rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.tm-bordered-btn {
+	    font-size: 1.3rem;
+	    padding: 0.5rem 1.8rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.tm-2-col-text { padding: 10%; }	
+}
+
+
+/* 4. icon and text 4 boxes
+----------------------------*/
+@media (max-width: 1199px) {
+	.tm-icon-text-box {	margin: 0 auto 30px; }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+	.tm-icon-text-box {	padding: 10%; }
+}
+
+@media (max-width: 991px) {
+	.tm-icon-text-boxes-container { max-width: 800px; }
+	.tm-section {
+		padding-top: 5%;
+    	padding-bottom: 4%;
+	}
+
+	.tm-section-title {	margin-bottom: 1rem; }
+
+	.tm-section-subtitle { margin-bottom: 2rem;	}
+}
+
+@media (max-width: 767px) {
+	.tm-section {
+		padding-top: 10%;
+    	padding-bottom: 8%;
+	}
+}
+
+/* 5. contact 
+--------------*/
+@media (max-width: 1199px) {
+	.tm-form-group-right { padding-left: 0;	}	
+}
+
+@media (max-width: 991px) {
+	.tm-contact-right {
+		padding-left: .9375rem;
+		margin-top: 2rem;
+	}
+
+	.tm-contact-info { margin-bottom: 2%; }
+}
+
+@media (max-width: 767px) {
+	.tm-form-group-left { padding-right: 0;	}
+}

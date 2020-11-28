@@ -13,7 +13,7 @@ from . import email
 from itertools import chain
 
 def landing_page(request):
-    return render(request,'base/landing.html')
+    return render(request,'base/landing_index.html')
 
 @login_excluded('home')
 def register_view(request):
