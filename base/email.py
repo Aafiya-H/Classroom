@@ -16,7 +16,7 @@ def submission_marks_mail(submission_id,teacher_id,marks):
     student_user = submission.student_id.student_id
     student_username = student_user.username
     student_email = student_user.email
-    email_body = 'Dear, {}, your submission for the assignment {} has been graded {} by Prof. {}'.format(student_username,assignment_name,marks,teacher_name)
+    message = 'Dear, {}, your submission for the assignment {} has been graded {} by Prof. {}'.format(student_username,assignment_name,marks,teacher_name)
     subject = 'Grading for assignment {}'.format(assignment_name)
     send_email(subject,student_email,message)
 
@@ -28,6 +28,11 @@ def assignment_post_mail(classroom_id,assignment_id):
     classroom_name = Classrooms.objects.get(pk=classroom_id.id).classroom_name
     due_date = assignment.due_date
     message = 'Dear Students, {} assignment has been posted to {}. Due date of the assignment is {}'.format(assignment_name,classroom_name,due_date)
+    instructions = 'Instructions of the assignment are: {}'.format(assignment.instructions)
+    message = message + '\n' + instructions
+    print('-'*20)
+    print(instructions)
+    print('-'*20)
     subject = 'New Assignment in {} class'.format(classroom_name)
     send_email(subject,email_list,message)
 
