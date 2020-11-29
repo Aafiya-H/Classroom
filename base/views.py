@@ -210,4 +210,3 @@ def mark_submission_request(request,submission_id,teacher_id):
         submission.save()
         email.submission_marks_mail(submission_id,teacher_id,marks)
         return JsonResponse({'status':'SUCCESS'})
-        

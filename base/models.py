@@ -7,11 +7,9 @@ class CustomUser(AbstractUser):
     email = models.EmailField()
     profile_photo = models.ImageField(upload_to='images',blank=True)
 
-    def get_avatar(self):
+    def set_avatar(self):
         if not self.profile_photo:
-            return  os.path.join(settings.MEDIA_URL, self.profile_photo)
-        else:
-            return os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
+            self.profile_photo = os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
 
 # Create your models here.
 class Classrooms(models.Model):
