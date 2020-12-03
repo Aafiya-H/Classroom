@@ -14,9 +14,12 @@
                             <!-- <div> -->
                                     <div class="img-as-background">
                                         <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
-                                        {% if mapping.teacher_id %}
-                                            <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
-                                        {% endif %}    
+
+                                        {% for teacher in teachers_all %}
+                                            {% if teacher.classroom_id == mapping.classroom_id %}
+                                                <p class="section-style"><i>{{ teacher.teacher_id}}</i></p>
+                                            {% endif %}
+                                        {% endfor %}   
                                     </div>
                             <!-- </div> -->
                             <div class="card-body card-text"><i>{{ mapping.classroom_id.section }}</i>
@@ -34,9 +37,13 @@
                     <!-- <div> -->
                             <div class="img-as-background">
                                 <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
-                                {% if mapping.teacher_id %}
-                                    <p class="section-style"><i>{{ mapping.teacher_id}}</i></p>
-                                {% endif %}    
+  
+
+                                {% for teacher in teachers_all %}
+                                    {% if teacher.classroom_id == mapping.classroom_id %}
+                                        <p class="section-style"><i>{{ teacher.teacher_id}}</i></p>
+                                    {% endif %}
+                                {% endfor %}  
                             </div>
                     <!-- </div> -->
 
