@@ -33,8 +33,9 @@ def register_view(request):
 def home(request):
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    teachers_all = Teachers.objects.all()
     mappings = chain(teacher_mapping,student_mapping) 
-    return render(request,'base/home.html',{'mappings':mappings}) 
+    return render(request,'base/home.html',{'mappings':mappings,'teachers_all':teachers_all}) 
 
 @login_required
 @teacher_required('home')
