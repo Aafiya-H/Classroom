@@ -163,6 +163,9 @@ def join_class_request(request):
         code = request.POST.get('class_code')
         try:
             classroom = Classrooms.objects.get(class_code=code)
+            student = Students.objects.filter(student_id = request.user, classroom_id = classroom)
+            if (student.count()!=0):
+                return redirect('home')
         except Exception as e:
             print(e)
             return JsonResponse({'status':'FAIL','message':str(e)})
