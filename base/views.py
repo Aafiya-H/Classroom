@@ -93,8 +93,9 @@ def assignment_summary(request,assignment_id):
     teachers = Teachers.objects.filter(classroom_id = assignment.classroom_id)
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    no_of_students = Students.objects.filter(classroom_id=assignment.classroom_id)
     mappings = chain(teacher_mapping,student_mapping)
-    return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
+    return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings,'no_of_students':no_of_students})
 
 @login_excluded('home')  
 def login_view(request):
