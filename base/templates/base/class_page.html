@@ -24,7 +24,8 @@
                 <div class="card assignment_card" style="width: 18rem;">
                 <div class="card-body">
                 <h5 class="card-title">{{assignment.assignment_name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ assignment.due_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Assignment posted on {{ assignment.posted_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Assignment due at {{ assignment.due_time }} on {{ assignment.due_date }}</h6>
                 </div>
                 </div>
                 </a>
