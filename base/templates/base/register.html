@@ -14,24 +14,12 @@
           <li class="nav-item">
             <a class="nav-link mybtn myinfo" href="{% url 'landing_page' %}">Home</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link mybtn myinfo" href="#">About</a>
-          </li> -->
+  
           <li class="nav-item active">
             <a class="nav-link mybtn myinfo" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
           </li>
         </ul>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->
+
     </div>
 </nav>
 {% endblock %}
@@ -47,12 +35,6 @@
         <div class="myform">
           <h1 class="signup_card"><b>SignUp</b></h1>
           <p class="signup_info">Create a new account by giving a username and a new password</p>
-    <!-- <form class="login-form">
-        <input type="text" placeholder="username"/>
-        <input type="password" placeholder="password"/>
-        <button>login</button>
-        <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form> -->
         <form class="login-form" method="POST"  enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}
