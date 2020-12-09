@@ -30,9 +30,6 @@ def assignment_post_mail(classroom_id,assignment_id):
     message = 'Dear Students, {} assignment has been posted to {}. Due date of the assignment is {}'.format(assignment_name,classroom_name,due_date)
     instructions = 'Instructions of the assignment are: {}'.format(assignment.instructions)
     message = message + '\n' + instructions
-    print('-'*20)
-    print(instructions)
-    print('-'*20)
     subject = 'New Assignment in {} class'.format(classroom_name)
     send_email(subject,email_list,message)
 
