@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.utils.timesince import timesince
 import os 
+from datetime import datetime
 
 class CustomUser(AbstractUser):
     email = models.EmailField()
@@ -32,6 +34,7 @@ class Assignments(models.Model):
     assignment_name=models.CharField(max_length=50)
     classroom_id=models.ForeignKey(Classrooms,on_delete=models.CASCADE)
     due_date=models.DateField()
+    due_time=models.TimeField(default=(10,10))
     posted_date=models.DateField(auto_now_add=True)
     instructions=models.TextField()
     total_marks=models.IntegerField(default=100)
@@ -40,10 +43,22 @@ class Assignments(models.Model):
     def __str__(self):
         return self.assignment_name
 
+    # def datetime_var(self):
+    #     dt1=datetime.date(self.due_date)
+    #     dt2=datetime.time(self.due_time)
+    #     return datetime.combine(dt1,dt2)
+
 class Submissions(models.Model):
     assignment_id=models.ForeignKey(Assignments,on_delete=models.CASCADE)
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
     submitted_date=models.DateField(auto_now_add=True)
+    submitted_time=models.TimeField(auto_now_add=True)
     submitted_on_time=models.BooleanField(default=True)
     marks_alloted=models.IntegerField(default=0)
     submission_file = models.FileField(upload_to='documents')
+
+    # def datetime_var(self):
+    #     dt1=datetime.date(self.submitted_date)
+    #     dt2=datetime.time(self.submitted_time)
+    #     dt = datetime.combine(dt1,dt2)
+    #     return dt

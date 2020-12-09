@@ -11,6 +11,7 @@ from .forms import *
 from . import email
 
 from itertools import chain
+from datetime import datetime
 
 def landing_page(request):
     return render(request,'base/landing_index.html')
@@ -92,8 +93,9 @@ def assignment_summary(request,assignment_id):
     teachers = Teachers.objects.filter(classroom_id = assignment.classroom_id)
     teacher_mapping = Teachers.objects.filter(teacher_id=request.user).select_related('classroom_id')
     student_mapping = Students.objects.filter(student_id=request.user).select_related('classroom_id')
+    no_of_students = Students.objects.filter(classroom_id=assignment.classroom_id)
     mappings = chain(teacher_mapping,student_mapping)
-    return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings})
+    return render(request,'base/assignment_summary.html',{'assignment':assignment,'submissions':submissions,'mappings':mappings,'no_of_students':no_of_students})
 
 @login_excluded('home')  
 def login_view(request):
@@ -128,10 +130,11 @@ def create_assignment(request,classroom_id):
         if form.is_valid():
             assignment_name = form.cleaned_data.get('assignment_name')
             due_date = form.cleaned_data.get('due_date')
+            due_time = form.cleaned_data.get('due_time')
             classroom_id = Classrooms.objects.get(pk=classroom_id)
             instructions = form.cleaned_data.get('instructions')
             total_marks = form.cleaned_data.get('total_marks')
-            assignment = Assignments(assignment_name = assignment_name,due_date = due_date,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
+            assignment = Assignments(assignment_name = assignment_name,due_date = due_date,due_time=due_time,instructions = instructions,total_marks = total_marks,classroom_id=classroom_id)
             assignment.save()
             email.assignment_post_mail(classroom_id,assignment.id)
             return redirect('render_class',id=classroom_id.id)
@@ -190,6 +193,11 @@ def submit_assignment_request(request,assignment_id):
     except Exception as e:  
         print(str(e))  
         submission = Submissions(assignment_id = assignment,student_id= student_id,submission_file = file_name)
+        dt1=datetime.now()
+        dt2=datetime.combine(assignment.due_date,assignment.due_time)
+        time = timesince(dt1, dt2)
+        if time[0]=='0':
+            submission.submitted_on_time=False
         submission.save()
         email.submission_done_mail(assignment_id,request.user,file_name)
         return JsonResponse({'status':'SUCCESS'})

@@ -13,7 +13,6 @@ http://www.templatemo.com/tm-484-ocean
 -->
 
     <!-- load stylesheets -->
-    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"><!-- Google web font "Open Sans", https://www.google.com/fonts/specimen/Open+Sans -->
     <link rel="stylesheet" href="{% static 'landing/font-awesome-4.5.0/css/font-awesome.min.css' %}"> <!-- Font Awesome, https://fortawesome.github.io/Font-Awesome/ -->
     <link rel="stylesheet" href="{% static 'landing/css/bootstrap.min.css' %}">                       <!-- Bootstrap style, http://v4-alpha.getbootstrap.com/ -->
@@ -31,9 +30,10 @@ http://www.templatemo.com/tm-484-ocean
 
         <div class="container-fluid">
             
-            <div class="row"> 
+            <div class="row "> 
 
                 <section class="tm-section-intro">
+                <div class="overlay">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <div class="tm-wrapper-center">
                             <h1 class="tm-section-intro-title">Big Ocean</h1>
@@ -43,6 +43,7 @@ http://www.templatemo.com/tm-484-ocean
                             <a href="#tm-section-2" class="tm-btn-white-big">Explore</a>
                         </div>            
                     </div>
+                </div>
                 </section>    
 
             </div>
@@ -106,8 +107,10 @@ http://www.templatemo.com/tm-484-ocean
                 
                 <section class="tm-2-col-img-text tm-2-col-img-lg-right">
                     
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-2-col-img">                    
-                        <img src="{% static 'img/sun-cloud.jpg' %}" alt="Image" class="img-fluid">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-2-col-img">
+                        <div class="overlay">                 
+                        <img src="{% static 'landing/img/study.jpg' %}" alt="Image" class="img-fluid">
+                        </div> 
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-2-col-text">
@@ -132,7 +135,7 @@ http://www.templatemo.com/tm-484-ocean
                 <section class="tm-2-col-img-text tm-2-col-img-lg-left">
                     
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-2-col-img">                    
-                        <img src="{% static 'landing/img/mountain.jpg' %}" alt="Image" class="img-fluid">
+                        <img src="{% static 'landing/img/books.jpg' %}" alt="Image" class="img-fluid">
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-2-col-text">

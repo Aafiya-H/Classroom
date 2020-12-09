@@ -50,17 +50,26 @@
     <input type="hidden" id="submission_id" name="submission_id">
     <input type="hidden" id="assignment_id" name="assignment_id">
     <input type="hidden" id="user_id" name="user_id" >
+    <br>
+    <h4>&emsp;&emsp;&emsp;&emsp;&emsp; Total students: {{ no_of_students.count }} &emsp;&emsp;&emsp;&emsp;&emsp; No. of Submissions: {{ submissions.count }}</h4>
+    {% for submission in submissions %}
     <div class="container_of_submissions">
-      {% for submission in submissions %}
+      <br>   
         <div class="card-body submission-card">
             <h5 class="card-title">{{ submission.student_id.student_id.username }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ submission.submitted_date }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">{{ submission.marks_alloted }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Submitted at {{ submission.submitted_time }} on {{ submission.submitted_date }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ submission.marks_alloted }} / {{ submission.assignment_id.total_marks }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Due date and time : {{ submission.assignment_id.due_time }} on {{ submission.assignment_id.due_date }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{submission.submitted_on_time}}</h6>
+            {% if submission.submitted_on_time %}
+            <h6 class="card-subtitle mb-2 text-muted">On time</h6>
+            {% else %}
+            <h6 class="card-subtitle mb-2 text-muted">Oops! Submitted late</h6>
+            {% endif %}
             <a  href="{% get_media_prefix %}{{ submission.submission_file }}" download> Download submitted file </a>
             <br>
             <a href="#mark_assignment" data-submission_value="{{ submission.id }}" data-assignment_value="{{ submission.assignment_id.id }}" data-user_id="{{ user.id }}">Mark Submission</a>
-          </div>
-        <br>
+        </div>
       
     </div>
 

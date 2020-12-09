@@ -21,7 +21,7 @@ a:focus {
 /* 1. Intro 
 --------------------*/
 .tm-section-intro {
-	background-image: url(../img/ocean-bg.jpg);
+	background-image: url("../img/classroom.jpg") !important;
 	background-attachment: fixed;
 	background-position: center top;
 	background-repeat: no-repeat;
@@ -38,6 +38,14 @@ a:focus {
 	        justify-content: center;
 	text-align: center;
 	height: 800px;
+}
+
+.overlay{
+	margin-top: auto;
+	width:100%;
+	height: 100%;
+	background: black;
+	opacity: 0.8;
 }
 
 .tm-wrapper-center {
@@ -75,8 +83,8 @@ a:focus {
 
 .tm-btn-white-big {
     font-size: 2.4rem;
-    color: #a1c7f1;
-    background-color: white;
+    color: #002c5e;
+    background-color: rgb(75, 118, 236);
     padding: 0.75rem 2.5rem;
     border-radius: 0.5rem;
 }

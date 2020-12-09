@@ -20,6 +20,7 @@ class JoinClassForm(forms.Form):
 class CreateAssignmentForm(forms.Form):
     assignment_name = forms.CharField(max_length=50,label='Assignment Name')
     due_date = forms.DateField(initial=datetime.date.today(),label='Due Date')
+    due_time = forms.TimeField(initial=(13,13,1),label='Due Time')
     instructions = forms.CharField(label='Instructions',widget=forms.Textarea)
     total_marks = forms.IntegerField(label='Total Marks')
 
