@@ -8,17 +8,17 @@
 
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light navbar_custom">
-    <a class="navbar-brand" href="#" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 7%; margin-right: 30%"><b>Classroom</b></a>
+    <a class="navbar-brand" href="{% url 'landing_page' %}" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 7%; margin-right: 30%"><b>Classroom</b></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link mybtn myinfo" href="#">Home</a>
+            <a class="nav-link mybtn myinfo" href="{% url 'landing_page' %}">Home</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link mybtn myinfo" href="#">About</a>
-          </li>
+          </li> -->
           <li class="nav-item active">
-            <a class="nav-link mybtn myinfo" href="#">Login/Signup<span class="sr-only">(current)</span></a>
+            <a class="nav-link mybtn myinfo" href="{% url 'login' %}">Login<span class="sr-only">(current)</span></a>
           </li>
         </ul>
           <!-- <li class="nav-item dropdown">
@@ -33,9 +33,6 @@
             </div>
           </li> -->
     </div>
-    <!-- <button class="mybtn myinfo">Home</button>
-    <button class="mybtn myinfo">About Us</button>
-    <button class="mybtn myinfo">Sign Up</button> -->
 </nav>
 {% endblock %}
 
