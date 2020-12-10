@@ -5,8 +5,9 @@
 <h1 align = 'center'> Classroom
 </h1>
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; [![](https://img.shields.io/badge/Made_with-Django-blue?style=for-the-badge)](https://docs.djangoproject.com/en/3.1/)
-
+<!---
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; [![](https://img.shields.io/badge/Made_with-Django-blue?style=for-the-badge)](https://docs.djangoproject.com/en/3.1/)
+--->
 
 <h2 align='center'>
 About 
