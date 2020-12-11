@@ -14,18 +14,21 @@
 </head>
 <body class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light navbar_custom">
-        <nav role="navigation">
-            <div id="menuToggle">
+        <nav role="navigation" >
+            <div id="menuToggle" >
               <input type="checkbox" />
               <span></span>
               <span></span>
               <span></span>
               <ul id="menu">
+                <div style="height: 100vh !important; overflow-y: scroll;" >
                 {% if mappings %}
+                <h3 style="color: darkgray;"><b>All Classes</b></h3>
                     {% for mapping in mappings %}
-                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name}}</li></a>
+                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
                     {% endfor %}
                 {% endif %}
+              </div>
               </ul>
             </div>
           </nav>

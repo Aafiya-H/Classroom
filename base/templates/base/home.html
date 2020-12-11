@@ -13,16 +13,16 @@
                         <div class="card custom_card card-margin" style="width: 18rem;">
                             <!-- <div> -->
                                     <div class="img-as-background">
-                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
+                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
 
                                         {% for teacher in teachers_all %}
                                             {% if teacher.classroom_id == mapping.classroom_id %}
-                                                <p class="section-style"><i>{{ teacher.teacher_id}}</i></p>
+                                                <p class="section-style"><i>{{ teacher.teacher_id|truncatechars:15 }}</i></p>
                                             {% endif %}
                                         {% endfor %}   
                                     </div>
                             <!-- </div> -->
-                            <div class="card-body card-text"><i>{{ mapping.classroom_id.section }}</i>
+                            <div class="card-body card-text"><i>{{ mapping.classroom_id.section|truncatechars:20 }}</i>
                             </div>
                         </div>
                     </div>
@@ -36,18 +36,18 @@
                 <div class="card custom_card card-margin" style="width: 18rem;">
                     <!-- <div> -->
                             <div class="img-as-background">
-                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name }}</h2> </a> 
+                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
   
 
                                 {% for teacher in teachers_all %}
                                     {% if teacher.classroom_id == mapping.classroom_id %}
-                                        <p class="section-style"><i>{{ teacher.teacher_id}}</i></p>
+                                        <p class="section-style"><i>{{ teacher.teacher_id|truncatechars:30 }}</i></p>
                                     {% endif %}
                                 {% endfor %}  
                             </div>
                     <!-- </div> -->
 
-                    <div class="card-body card-text"><i>{{ mapping.classroom_id.section }}</i></div>
+                    <div class="card-body card-text"><i>{{ mapping.classroom_id.section|truncatechars:30 }}</i></div>
                 </div>
             </div>
             {% endif %}

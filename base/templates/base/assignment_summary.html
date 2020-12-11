@@ -25,7 +25,7 @@
               <ul id="menu">
                 {% if mappings %}
                     {% for mapping in mappings %}
-                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name}}</li></a>
+                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name|truncatechars:30}}</li></a>
                     {% endfor %}
                 {% endif %}
               </ul>
@@ -60,11 +60,10 @@
             <h6 class="card-subtitle mb-2 text-muted">Submitted at {{ submission.submitted_time }} on {{ submission.submitted_date }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">{{ submission.marks_alloted }} / {{ submission.assignment_id.total_marks }}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Due date and time : {{ submission.assignment_id.due_time }} on {{ submission.assignment_id.due_date }}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">{{submission.submitted_on_time}}</h6>
             {% if submission.submitted_on_time %}
-            <h6 class="card-subtitle mb-2 text-muted">On time</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Submitted on time</h6>
             {% else %}
-            <h6 class="card-subtitle mb-2 text-muted">Oops! Submitted late</h6>
+            <h6 class="card-subtitle mb-2 text-muted" style="color: crimson !important;">Oops! Submitted late</h6>
             {% endif %}
             <a  href="{% get_media_prefix %}{{ submission.submission_file }}" download> Download submitted file </a>
             <br>
