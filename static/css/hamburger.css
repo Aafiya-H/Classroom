@@ -44,13 +44,13 @@ margin-left: 20px;
 }
 
 .myinfo {
-border-color: #2e45c7;
-color: #2e45c7
+border-color: #2e45c7 !important;
+color: #2e45c7 !important;
 }
 
 .myinfo:hover {
-background: #2e45c7;
-color: white;
+background: #2e45c7 !important;
+color: white !important;
 }
  
 .mytoplogo{

@@ -20,15 +20,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-      
               <button class="mybtn myinfo mybtn-active" type="button" data-toggle="modal" data-target="#add_class">Create Class</button>
             </li>
             <li class="nav-item active">
-              
               <button class="mybtn myinfo mybtn-active" type="button" data-toggle="modal" data-target="#join_class">Join Class</button>
             </li>
             <li class="nav-item active">
-              <a href="#"><button class="mybtn myinfo mybtn-active"><a href="{% url 'logout' %}">Logout</a></button></a>
+              <a href="{% url 'logout' %}" type="button" class="mybtn myinfo mybtn-active" style="text-decoration: none;">Logout</a>
             </li>
           </ul>
       </div>
