@@ -22,12 +22,16 @@ In todays day and age of online learning, it is important to have an online plat
 Interface 
 </h2>
 <p align="center">
-  <img src ="./assets/website.gif" width = 500px>
-  <img src ="./assets/website.gif" width = 500px>
+  <img src ="./assets/1.png" width = 500px>
 </p>
 <p align="center">
-  <img src ="./assets/website.gif" width = 500px>
-  <img src ="./assets/website.gif" width = 500px>
+  <img src ="./assets/2.png" width = 500px>
+</p>
+<p align="center">
+  <img src ="./assets/3.png" width = 500px>
+</p>
+<p align="center">
+  <img src ="./assets/4.png" width = 500px>
 </p>
 
 -----------------------------------
