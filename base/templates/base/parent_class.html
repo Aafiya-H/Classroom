@@ -15,18 +15,26 @@
 <body class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light navbar_custom">
         <nav role="navigation" >
-            <div id="menuToggle" >
+            <div id="menuToggle" style="z-index: 6;" >
               <input type="checkbox" />
               <span></span>
               <span></span>
               <span></span>
-              <ul id="menu">
-                <div style="height: 100vh !important; overflow-y: scroll;" >
+              <ul id="menu" style="padding-top: 40px; padding-right: 3px; padding-left: 30px;">
+                
+                <div style="height: 100vh !important; overflow-y: auto; padding: none !important; margin:0% !important" >
                 {% if mappings %}
-                <h3 style="color: darkgray;"><b>All Classes</b></h3>
+                <h4 class="hamburger_heading"><b>All Classes</b></h4>
+                <div class="Overlapped_white"></div>
+                <br><br><br>
                     {% for mapping in mappings %}
-                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
+                        {% if classroom == mapping.classroom_id %}
+                          <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="hamburger_current_class">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
+                        {% else %}
+                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="highlights">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
+                        {% endif %}
                     {% endfor %}
+                    
                 {% endif %}
               </div>
               </ul>
