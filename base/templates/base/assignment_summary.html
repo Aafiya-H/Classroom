@@ -42,6 +42,11 @@
                   <li class="nav-item">
                     <a class="nav-link mybtn myinfo" href="{% url 'render_class' id=assignment.classroom_id.id %}">Back to Class</a>
                   </li>
+                  <li class="nav-item active">
+                    <div class="image_cropper">
+                      <img src="{% get_media_prefix %}{{ user.profile_photo }}" alt="Profile Pic" class="profile_pic_style">
+                    </div>
+                  </li>
             </ul>
         </div>
         </nav>    

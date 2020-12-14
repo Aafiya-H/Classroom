@@ -69,3 +69,26 @@ body{
     text-align: center;
     color: #f0f0f6;
 }
+
+.profile_pic_style{
+    /* display: inline !important; */
+    /* margin: 0 auto !important; */
+    /* margin-bottom: -25% !important;  */
+    /* margin-right: 25% !important; */
+    /* width: 100% !important; */
+    height: 100%;
+    width: 100%;
+    object-fit: cover !important;
+    object-position: center;
+  }
+  
+  .image_cropper{
+    width: 60px !important;
+    height: 60px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
+    margin: 5px;
+    margin-right: 20px;
+    float: right;
+  }

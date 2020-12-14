@@ -28,6 +28,11 @@
             <li class="nav-item active">
               <a href="{% url 'logout' %}" type="button" class="mybtn myinfo mybtn-active" style="text-decoration: none;">Logout</a>
             </li>
+            <li class="nav-item active">
+              <div class="image_cropper">
+                <img src="{% get_media_prefix %}{{ user.profile_photo }}" alt="Profile Pic" class="profile_pic_style">
+              </div>
+            </li>
           </ul>
       </div>
     </nav>
