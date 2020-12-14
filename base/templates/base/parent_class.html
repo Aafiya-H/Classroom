@@ -20,21 +20,20 @@
               <span></span>
               <span></span>
               <span></span>
-              <ul id="menu" style="padding-top: 40px; padding-right: 3px; padding-left: 30px;">
+              <ul id="menu" style="padding-top: 40px; padding-right: 3px; padding-left: 30px; box-shadow: 1px 1px 2px 1px #888888;">
                 
                 <div style="height: 100vh !important; overflow-y: auto; padding: none !important; margin:0% !important" >
                 {% if mappings %}
-                <h4 class="hamburger_heading"><b>All Classes</b></h4>
-                <div class="Overlapped_white"></div>
-                <br><br><br>
+                  <h4 class="hamburger_heading"><b>All Classes</b></h4>
+                  <div class="Overlapped_white"></div>
+                  <br><br><br>
                     {% for mapping in mappings %}
                         {% if classroom == mapping.classroom_id %}
                           <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="hamburger_current_class">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
                         {% else %}
                         <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="highlights">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
                         {% endif %}
-                    {% endfor %}
-                    
+                    {% endfor %}                    
                 {% endif %}
               </div>
               </ul>

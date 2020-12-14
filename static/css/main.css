@@ -92,3 +92,41 @@ body{
     margin-right: 20px;
     float: right;
   }
+
+  .hamburger_current_class{
+    color:white;
+    background-color: rgb(23, 70, 172);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .highlights:hover{
+    color:black;
+    background-color: rgb(47, 196, 188);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .highlights{
+    z-index: -1;
+  }
+  
+  .hamburger_heading{
+    color: darkgray;
+    margin-top: 4vh; 
+    margin-left: 5vw; 
+    margin-bottom: 20px;
+    position: absolute;
+    z-index: 6;
+  }
+  
+  .Overlapped_white{
+    background-color:white;
+    position: fixed;
+    height: 10vh;
+    width: 18vw;
+  }

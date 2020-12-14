@@ -17,19 +17,29 @@
     <div>
     <nav class="navbar navbar-expand-lg navbar-light navbar_custom">
         <nav role="navigation">
-            <div id="menuToggle">
-              <input type="checkbox" />
-              <span></span>
-              <span></span>
-              <span></span>
-              <ul id="menu">
-                {% if mappings %}
-                    {% for mapping in mappings %}
-                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li>{{mapping.classroom_id.classroom_name|truncatechars:30}}</li></a>
-                    {% endfor %}
-                {% endif %}
-              </ul>
+          <div id="menuToggle" style="z-index: 6;" >
+            <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu" style="padding-top: 40px; padding-right: 3px; padding-left: 30px; box-shadow: 1px 1px 2px 1px #888888;">
+              
+              <div style="height: 100vh !important; overflow-y: auto; padding: none !important; margin:0% !important" >
+              {% if mappings %}
+                <h4 class="hamburger_heading"><b>All Classes</b></h4>
+                <div class="Overlapped_white"></div>
+                <br><br><br>
+                  {% for mapping in mappings %}
+                      {% if assignment.classroom_id == mapping.classroom_id %}
+                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="hamburger_current_class">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
+                      {% else %}
+                      <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><li class="highlights">{{mapping.classroom_id.classroom_name|truncatechars:30 }}</li></a>
+                      {% endif %}
+                  {% endfor %}                    
+              {% endif %}
             </div>
+            </ul>
+          </div>
           </nav>
           <div class="navbar-brand" href="#" style="font-size:250% !important; color:#2e45c7 !important; margin-left: 7%; margin-right: 20%"><b>{{assignment.assignment_name}}</b></div>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -56,8 +66,8 @@
     <input type="hidden" id="assignment_id" name="assignment_id">
     <input type="hidden" id="user_id" name="user_id" >
     <br>
-    <h4>&emsp;&emsp;&emsp;&emsp;&emsp; Total students: {{ no_of_students.count }} &emsp;&emsp;&emsp;&emsp;&emsp; No. of Submissions: {{ submissions.count }}</h4>
-    {% for submission in submissions %}
+    <h4>&emsp;&emsp;&emsp;&emsp;&emsp; Total students: {{ no_of_students.count }} &emsp;&emsp;&emsp;&emsp;&emsp; No. of Submissions: {{ submissions.count }} &emsp;&emsp;&emsp;&emsp;&emsp; <a href="{% url 'delete_assignment' assignment_id=assignment.id %}">Delete Assignment</a></h4> 
+    {% for submission in submissions %} 
     <div class="container_of_submissions">
       <br>   
         <div class="card-body submission-card">

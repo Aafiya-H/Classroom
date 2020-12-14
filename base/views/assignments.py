@@ -49,10 +49,11 @@ def assignment_summary(request,assignment_id):
 @login_required(login_url='login')
 @teacher_required('home')
 def delete_assignment(request,assignment_id):
-    assignment = Assignments.objects.filter(pk=assignment_id)
-    if assignment.count() == 0:
-        return redirect('home')
-    else:
+    try:
+        assignment = Assignments.objects.get(pk=assignment_id)
         classroom_id = assignment.classroom_id.id 
-        Assignments.objects.filter(pk=assignment_id).delete()
+        Assignments.objects.get(pk=assignment_id).delete()
         return redirect('render_class', id=classroom_id)
+    except Exception(e):
+        return redirect('home')
+        

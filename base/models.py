@@ -7,12 +7,11 @@ import datetime
 
 class CustomUser(AbstractUser):
     email = models.EmailField()
-    profile_photo = models.ImageField(upload_to='images',blank=True)
+    profile_photo = models.ImageField(upload_to='images', default='images/default_user_image.jpg')
 
-    def set_avatar(self):
-        if not self.profile_photo:
-            self.profile_photo = os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
-            # self.profile_photo = './static/images/default_user_image.jpg'
+    # def set_avatar(self):
+    #     if not self.profile_photo:
+    #         self.profile_photo = os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
 
 class Classrooms(models.Model):
     classroom_name=models.CharField(max_length=100)
