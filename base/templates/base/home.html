@@ -12,9 +12,8 @@
                     <div class="col-md-3">
                         <div class="card custom_card card-margin" style="width: 18rem;">
                             <!-- <div> -->
-                                    <div class="img-as-background">
-                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
-
+                                    <div class="img-as-background colorme">
+                                        <a href="{% url 'render_class' id=mapping.classroom_id.id %}" style="text-decoration: none;"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
                                         {% for teacher in teachers_all %}
                                             {% if teacher.classroom_id == mapping.classroom_id %}
                                                 <p class="section-style"><i>{{ teacher.teacher_id|truncatechars:15 }}</i></p>
@@ -35,10 +34,8 @@
             <div class="col-md-3">
                 <div class="card custom_card card-margin" style="width: 18rem;">
                     <!-- <div> -->
-                            <div class="img-as-background">
-                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
-  
-
+                            <div class="img-as-background colorme">
+                                <a href="{% url 'render_class' id=mapping.classroom_id.id %}" style="text-decoration: none;"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
                                 {% for teacher in teachers_all %}
                                     {% if teacher.classroom_id == mapping.classroom_id %}
                                         <p class="section-style"><i>{{ teacher.teacher_id|truncatechars:30 }}</i></p>
@@ -54,4 +51,18 @@
         {% endfor %}
     </div>
     {% endif %}
+    <script type="text/javascript">
+        var colors_1 = ['#92081C', '#050377','#23542B','#462247'];   //dark colors
+        var colors_2 = ['#FA9696', '#BCC0FF','#3AFB76','#964998'];    //light colors
+        var x = document.getElementsByClassName('colorme');
+        for (i=0;i<x.length;i++)
+        {
+            var index = Math.floor(Math.random() * colors_1.length);
+            var random_color_1 = colors_1[index];
+            var random_color_2 = colors_2[index];
+            var ans = "linear-gradient(90deg, " + random_color_1 + ", " + random_color_2 + ")";
+            x[i].style.background = ans;
+            // alert(ans);
+        }
+    </script>
 {% endblock %}

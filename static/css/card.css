@@ -6,7 +6,8 @@
 }
 
 .img-as-background{
-    background-image: linear-gradient(to bottom right, rgb(16, 6, 107), rgb(101, 164, 189));
+    /* background: linear-gradient(90deg,#10066b, #65a4bd); */
+    /* background: red; */
     border-radius: 20px 20px 0px 0px !important;
     /* resize:both; */
     /* background: rgb(25, 131, 48); */
