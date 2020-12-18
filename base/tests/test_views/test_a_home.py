@@ -48,3 +48,11 @@ class TestHomeViews(TestCase):
         context = response.context
         self.assertTrue(isinstance(context['teachers_all'],QuerySet))
         self.assertTrue(isinstance(context['mappings'],chain))
+
+    def test_e_check_home_output_length(self):
+        login = self.client.login(username='test_teacher',password='test_password')
+        response = self.client.get('/home/')
+        self.assertEqual(response.status_code,200)
+        context = response.context
+        self.assertEqual(len(context['teachers_all']),1)
+        

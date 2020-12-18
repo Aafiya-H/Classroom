@@ -27,8 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'crispy_forms',
-    'freezegun',
-    'mock'
+    'freezegun', #for testing
+    'mock'  #for testing
 ]
 
 MIDDLEWARE = [
