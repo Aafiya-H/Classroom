@@ -60,7 +60,7 @@ def create_class_request(request):
         classroom.save()
         teacher = Teachers(teacher_id=request.user,classroom_id=classroom)
         teacher.save()
-        return JsonResponse({'status':'FALIURE'})
+        return JsonResponse({'status':'SUCCESS'})
 
 @login_required(login_url='login')
 def join_class_request(request):
