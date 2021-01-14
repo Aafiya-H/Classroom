@@ -11,7 +11,6 @@
             {% if forloop.counter|divisibleby:4 %}
                     <div class="col-md-3">
                         <div class="card custom_card card-margin" style="width: 18rem;">
-                            <!-- <div> -->
                                     <div class="img-as-background colorme">
                                         <a href="{% url 'render_class' id=mapping.classroom_id.id %}" style="text-decoration: none;"><h2 class="class-name-style">{{ mapping.classroom_id.classroom_name|truncatechars:30 }}</h2> </a> 
                                         {% for teacher in teachers_all %}
@@ -20,7 +19,6 @@
                                             {% endif %}
                                         {% endfor %}   
                                     </div>
-                            <!-- </div> -->
                             <div class="card-body card-text"><i>{{ mapping.classroom_id.section|truncatechars:20 }}</i>
                             </div>
                         </div>
