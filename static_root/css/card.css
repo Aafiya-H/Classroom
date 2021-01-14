@@ -1,0 +1,63 @@
+.mycard {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border: 1px blue solid;
+}
+
+.img-as-background{
+    /* background: linear-gradient(90deg,#10066b, #65a4bd); */
+    /* background: red; */
+    border-radius: 20px 20px 0px 0px !important;
+    /* resize:both; */
+    /* background: rgb(25, 131, 48); */
+}
+
+.class-name-style{
+    text-align: center;
+    color: white;
+}
+
+.section-style{
+    text-align: center;
+    color: white;
+}
+
+.myheader {
+    height: 30%;
+    background: blue;
+    color: white;
+    text-align: center;
+}
+
+.mycontainer {
+    padding: 2px 16px;
+}
+
+.custom_card{
+    /* width: 370px !important;
+    height: 370px; */
+    border-radius: 20px !important ;
+}
+
+.card-img-caption {
+border-top-left-radius: calc(.25rem - 1px);
+border-top-right-radius: calc(.25rem - 1px);
+}
+
+.card-img-caption .card-img-top {
+z-index: 0;
+}
+    
+.card-img-caption .card-text {
+text-align: center;
+width: 100%;
+margin: 33% 0;
+position: absolute;
+z-index: 1;
+}
+
+
+.card-margin{
+    margin-right: 50px !important;
+}

@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+.mytopnav{
+    /* float:right; */
+    /* padding-right: 30px; */
+    max-width:100%;
+}
+/* 
+.topnav button{
+    padding-left:40px;
+    padding-right:40px; 
+} */
+
+body{
+    background-color: #f0f0f6 !important;
+}
+
+.mybtn-active {
+    border-color: #2e45c7 !important;
+    color: white !important;
+    background-color: #2e45c7 !important;
+}
+
+.mybtn {
+    border: 6px solid !important; 
+    border-color: #2e45c7 !important;
+    border-radius: 5px !important;
+    /* color: black !important; */
+    width: 10vw;
+    /* padding: 14px 28px !important; */
+    font-size: 15px !important;
+    cursor: pointer !important;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    text-align: center;
+    /* float: right; */
+}
+
+.myinfo {
+    background: white !important;
+    color: #2e45c7 !important;
+}
+  
+.myinfo:hover {
+    background: #2e45c7;
+    color: white;
+}
+
+.mynavbar-logo{
+    font-size: 60px;
+    float:left !important;
+    position: relative !important;
+    color: #2e45c7;
+    padding-right:900px;
+    font-weight: 900;
+    font-family:  'Inter', sans-serif;
+}
+
+.navbar_custom{
+    background-color: #f0f0f6 !important;   
+}
+
+.signup_card{
+    text-align: center;
+    color: #f0f0f6;
+
+}
+
+.signup_info{
+    text-align: center;
+    color: #f0f0f6;
+}
+
+.profile_pic_style{
+    /* display: inline !important; */
+    /* margin: 0 auto !important; */
+    /* margin-bottom: -25% !important;  */
+    /* margin-right: 25% !important; */
+    /* width: 100% !important; */
+    height: 100%;
+    width: 100%;
+    object-fit: cover !important;
+    object-position: center;
+  }
+  
+  .image_cropper{
+    width: 60px !important;
+    height: 60px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
+    margin: 5px;
+    margin-right: 20px;
+    float: right;
+  }
+
+  .hamburger_current_class{
+    color:white;
+    background-color: rgb(23, 70, 172);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .highlights:hover{
+    color:black;
+    background-color: rgb(47, 196, 188);
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .highlights{
+    z-index: -1;
+  }
+  
+  .hamburger_heading{
+    color: darkgray;
+    margin-top: 4vh; 
+    margin-left: 5vw; 
+    margin-bottom: 20px;
+    position: absolute;
+    z-index: 6;
+  }
+  
+  .Overlapped_white{
+    background-color:white;
+    position: fixed;
+    height: 10vh;
+    width: 18vw;
+  }
