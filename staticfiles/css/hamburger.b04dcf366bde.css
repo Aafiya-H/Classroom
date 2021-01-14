@@ -1,0 +1,124 @@
+/*
+ * Made by Erik Terwan
+ * 24th of November 2015
+ * MIT License
+ *
+ *
+ * If you are thinking of using this in
+ * production code, beware of the browser
+ * prefixes.
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+body
+{
+   margin: 0;
+   padding: 0;
+   background:#f0f0f6 !important;
+   color: #ffffff;
+   font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+/* .logout_button{
+  display: inline-block !important;
+  float:right !important;  
+} */
+
+/* .plus_button{
+  height:  20%;
+  width:  20%;
+  background-color: black !important;
+} */
+
+.mybtn {
+border: 6px solid black;
+background-color: white;
+border-radius: 5px;
+color: black;
+padding: 14px 28px;
+font-size: 16px;
+cursor: pointer;
+padding-left:40px;
+padding-right:40px;
+margin-top: 1%;
+margin-left: 20px;
+}
+
+.myinfo {
+border-color: #2e45c7 !important;
+color: #2e45c7 !important;
+}
+
+.myinfo:hover {
+background: #2e45c7 !important;
+color: white !important;
+}
+ 
+.mytoplogo{
+  font-size: 60px !important;
+  float:left !important;
+  padding-left:80px;
+  position: relative !important;
+  color: #2e45c7 !important;
+  margin-right: 46%;
+}
+
+.profile_pic_style{
+  /* display: inline !important; */
+  /* margin: 0 auto !important; */
+  /* margin-bottom: -25% !important;  */
+  /* margin-right: 25% !important; */
+  /* width: 100% !important; */
+  height: 100%;
+  width: 100%;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+.image_cropper{
+  width: 60px !important;
+  height: 60px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+  margin: 5px;
+  margin-right: 20px;
+  float: right;
+}
+
+.hamburger_current_class{
+  color:white;
+  background-color: rgb(23, 70, 172);
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.highlights:hover{
+  color:black;
+  background-color: rgb(47, 196, 188);
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.highlights{
+  z-index: -1;
+}
+
+.hamburger_heading{
+  color: darkgray;
+  margin-top: 4vh; 
+  margin-left: 5vw; 
+  margin-bottom: 20px;
+  position: absolute;
+  z-index: 6;
+}
+
+.Overlapped_white{
+  background-color:white;
+  position: fixed;
+  height: 10vh;
+  width: 18vw;
+}

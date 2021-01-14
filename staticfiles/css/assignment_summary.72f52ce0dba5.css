@@ -1,0 +1,13 @@
+.submission-card{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.center-heading{
+    text-align: center;
+}
+
+.container_of_submissions{
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+  }
