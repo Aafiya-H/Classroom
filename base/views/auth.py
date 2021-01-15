@@ -19,7 +19,8 @@ def register_view(request):
         else:
             return render(request,'base/register.html',{'form':form})
     form=UserRegisterationForm()
-    return render(request,'base/register.html',{'form':form})
+    return render(request,'base/register.html',{'form':form}) 
+    
 
 @login_excluded('home')  
 def login_view(request):
