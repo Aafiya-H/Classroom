@@ -12,6 +12,8 @@ class CustomUser(AbstractUser):
     # def set_avatar(self):
     #     if not self.profile_photo:
     #         self.profile_photo = os.path.join(settings.MEDIA_URL,'images/default_image.jpg')
+    class Meta:
+        db_table = 'custom_user'
 
 class Classrooms(models.Model):
     classroom_name=models.CharField(max_length=100)
