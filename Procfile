@@ -1,1 +1,1 @@
-web: gunicorn Classroom_project.wsgi --log-file -
+web: python manage.py collectstatic --no-input; gunicorn Classroom_project.wsgi --log-file -
